@@ -51,10 +51,10 @@ body{
 .nav-tab.on{color:var(--gold);border-bottom-color:var(--gold);}
 .lang-toggle{
   position:absolute;left:1.5em;
-  font-family:'Cormorant SC',serif;font-weight:400;
+  font-family:'Cormorant SC',serif;font-weight:600;
   font-size:12pt;letter-spacing:0.06em;
-  background:var(--gold);
-  border:1px solid var(--gold);
+  background:transparent;
+  border:1.11px solid var(--gold);
   color:var(--teal);
   padding:0.25em 0.7em;
   border-radius:2px;cursor:pointer;
@@ -344,7 +344,7 @@ body{
   font-weight:500;font-size:12pt;
   color:var(--teal);
   background:transparent;
-  border:0.5px solid #00687a;
+  border:1px solid #00687a;
   border-radius:2px;
   padding:0.6em 0.8em;
   transition:border-color 0.2s;
@@ -354,23 +354,23 @@ body{
   border-color:var(--gold);
 }
 .form-input::placeholder{
-  color:rgba(1,96,95,0.4);
+  color:rgba(0,107,117,0.45);
   font-style:italic;
 }
 textarea.form-input{min-height:4.5em;resize:vertical;}
 .toggle-group{display:grid;grid-template-columns:1fr 1fr;gap:0.8em;}
 .toggle-btn{
   font-family:'Cormorant SC',serif;
-  font-weight:400;font-size:14pt;
+  font-weight:600;font-size:14pt;
   letter-spacing:0.06em;
   color:var(--teal);
   background:transparent;
-  border:1px solid var(--gold);
+  border:1.11px solid var(--gold);
   padding:0.5em 0.5em;
   border-radius:2px;cursor:pointer;
   transition:all 0.2s;text-align:center;
 }
-.toggle-btn:hover{background:var(--teal);color:var(--gold);}
+.toggle-btn:hover{background:var(--teal);color:var(--gold);border-color:var(--teal);}
 .toggle-btn.selected{background:var(--teal);color:var(--gold);border-color:var(--teal);}
 .checkbox-row{display:flex;align-items:center;gap:0.6em;}
 .checkbox-row input[type="checkbox"]{
@@ -394,15 +394,15 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
 .submit-btn{
   display:block;width:100%;
   font-family:'Cormorant SC',serif;
-  font-weight:400;font-size:14pt;
+  font-weight:600;font-size:14pt;
   letter-spacing:0.08em;
   color:var(--teal);background:transparent;
-  border:1px solid var(--gold);
+  border:1.11px solid var(--gold);
   padding:0.6em;border-radius:2px;
   cursor:pointer;transition:all 0.2s;
   margin-top:1.5rem;
 }
-.submit-btn:hover{background:var(--teal);color:var(--gold);}
+.submit-btn:hover{background:var(--teal);color:var(--gold);border-color:var(--teal);}
 .form-note{
   font-family:'Cormorant Garamond',serif;
   font-style:italic;font-weight:400;font-size:11pt;
@@ -643,7 +643,7 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
 
       <div class="form-group">
         <label class="form-label" data-en="What song absolutely needs to play at the reception?" data-es="¿Qué canción no puede faltar en la fiesta?">What song absolutely needs to play at the reception?</label>
-        <input type="text" class="form-input" id="rsvpSong" placeholder="Optional" data-en-placeholder="Optional" data-es-placeholder="Opcional">
+        <input type="text" class="form-input" id="rsvpSong" placeholder="Artist — Song Title" data-en-placeholder="Artist — Song Title" data-es-placeholder="Artista — Título de la Canción">
       </div>
 
       <div class="form-group">
@@ -667,12 +667,12 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
     <!-- Asked of everyone -->
     <div class="form-group">
       <label class="form-label" data-en="Would you like to share a few words of love and well wishes?" data-es="¿Quisieras compartir unas palabras de amor y buenos deseos?">Would you like to share a few words of love and well wishes?</label>
-      <textarea class="form-input" id="rsvpWishes" placeholder="Optional" data-en-placeholder="Optional" data-es-placeholder="Opcional"></textarea>
+      <textarea class="form-input" id="rsvpWishes" placeholder="A few words for the couple..." data-en-placeholder="A few words for the couple..." data-es-placeholder="Unas palabras para la pareja..."></textarea>
     </div>
 
     <div class="form-group">
       <label class="form-label" data-en="Just for fun, where should we go on our honeymoon?" data-es="Solo por diversión, ¿a dónde deberíamos ir de luna de miel?">Just for fun, where should we go on our honeymoon?</label>
-      <input type="text" class="form-input" id="rsvpHoneymoon" placeholder="Optional" data-en-placeholder="Optional" data-es-placeholder="Opcional">
+      <input type="text" class="form-input" id="rsvpHoneymoon" placeholder="A city, a country, an adventure..." data-en-placeholder="A city, a country, an adventure..." data-es-placeholder="Una ciudad, un país, una aventura...">
     </div>
 
     <button type="button" class="submit-btn" id="submitRsvp" data-en="Send RSVP" data-es="Enviar RSVP">Send RSVP</button>
