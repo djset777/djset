@@ -560,17 +560,15 @@ textarea.form-input{min-height:5.5em;resize:vertical;}
 
     <input type="hidden" id="rsvpAttending" value="">
 
-    <!-- RESTORED FIELDS -->
-    <div id="yesSection" class="form-hidden">
-      <div class="form-group">
-        <label class="form-label" data-en="Would you like to share a few words of love and well wishes?" data-es="¿Te gustaría compartir unas palabras de amor y buenos deseos?">Would you like to share a few words of love and well wishes?</label>
-        <textarea class="form-input" id="rsvpWishes" placeholder="A few words for the newlyweds" data-en-placeholder="A few words for the newlyweds" data-es-placeholder="Unas palabras para los recién casados"></textarea>
-      </div>
+    <!-- FORCED RENDER FIELDS -->
+    <div class="form-group">
+      <label class="form-label" data-en="Would you like to share a few words of love and well wishes?" data-es="¿Te gustaría compartir unas palabras de amor y buenos deseos?">Would you like to share a few words of love and well wishes?</label>
+      <textarea class="form-input" id="rsvpWishes" placeholder="A few words for the newlyweds" data-en-placeholder="A few words for the newlyweds" data-es-placeholder="Unas palabras para los recién casados"></textarea>
+    </div>
 
-      <div class="form-group">
-        <label class="form-label" data-en="Just for fun, where should we go on our honeymoon?" data-es="Solo por diversión, ¿a dónde deberíamos ir en nuestra luna de miel?">Just for fun, where should we go on our honeymoon?</label>
-        <input type="text" class="form-input" id="rsvpHoneymoon" placeholder="A city, a country, a beach — surprise us" data-en-placeholder="A city, a country, a beach — surprise us" data-es-placeholder="Una ciudad, un país, una playa — sorpréndenos">
-      </div>
+    <div class="form-group">
+      <label class="form-label" data-en="Just for fun, where should we go on our honeymoon?" data-es="Solo por diversión, ¿a dónde deberíamos ir en nuestra luna de miel?">Just for fun, where should we go on our honeymoon?</label>
+      <input type="text" class="form-input" id="rsvpHoneymoon" placeholder="A city, a country, a beach — surprise us" data-en-placeholder="A city, a country, a beach — surprise us" data-es-placeholder="Una ciudad, un país, una playa — sorpréndenos">
     </div>
 
     <div id="noSection" class="form-hidden">
@@ -624,7 +622,6 @@ tabs.forEach(tab => {
 // RSVP Toggle logic
 const attendBtns = document.querySelectorAll('#attendToggle .toggle-btn');
 const attendingInput = document.getElementById('rsvpAttending');
-const yesSection = document.getElementById('yesSection');
 const noSection = document.getElementById('noSection');
 
 attendBtns.forEach(btn => {
@@ -634,11 +631,9 @@ attendBtns.forEach(btn => {
     const val = btn.getAttribute('data-val');
     attendingInput.value = val;
     if(val === 'yes') {
-      yesSection.classList.remove('form-hidden');
       noSection.classList.add('form-hidden');
     } else {
       noSection.classList.remove('form-hidden');
-      yesSection.classList.add('form-hidden');
     }
   });
 });
