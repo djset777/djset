@@ -591,16 +591,16 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
 
   <p class="rsvp-deadline rv" data-en="Please respond by March 27, 2027." data-es="Por favor responda antes del 27 de marzo de 2027.">Please respond by March 27, 2027.</p>
 
-  <div class="rsvp-form content rv" id="rsvpForm">
+  <form class="rsvp-form content rv" id="rsvpForm">
 
     <div class="form-group">
-      <label class="form-label" data-en="Full Name" data-en-placeholder="First and Last Name" data-es="Nombre Completo" data-es-placeholder="Nombre y Apellido">Full Name</label>
-      <input type="text" class="form-input" id="rsvpName" placeholder="First and Last Name" required>
+      <label class="form-label" data-en="Full Name" data-es="Nombre Completo">Full Name</label>
+      <input type="text" class="form-input" id="rsvpName" placeholder="First and Last Name" data-en-placeholder="First and Last Name" data-es-placeholder="Nombre y Apellido" required>
     </div>
 
     <div class="form-group">
       <label class="form-label" data-en="Email" data-es="Correo Electrónico">Email</label>
-      <input type="email" class="form-input" id="rsvpEmail" placeholder="name@email.com" required>
+      <input type="email" class="form-input" id="rsvpEmail" placeholder="name@email.com" data-en-placeholder="name@email.com" data-es-placeholder="nombre@correo.com" required>
     </div>
 
     <div class="form-group">
@@ -612,11 +612,139 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
     </div>
 
     <div id="attendingFields" class="form-hidden">
-      <!-- Remaining form fields would go here -->
+      <div class="form-group">
+        <label class="form-label" data-en="Dietary Restrictions or Allergies" data-es="Restricciones Alimentarias o Alergias">Dietary Restrictions or Allergies</label>
+        <input type="text" class="form-input" id="rsvpDiet" placeholder="Let us know if you have any" data-en-placeholder="Let us know if you have any" data-es-placeholder="Háganos saber si tiene alguna">
+      </div>
+      <div class="form-group">
+        <label class="form-label" data-en="Song Request" data-es="Canción Solicitada">Song Request</label>
+        <input type="text" class="form-input" id="rsvpSong" placeholder="Artist and Title" data-en-placeholder="Artist and Title" data-es-placeholder="Artista y Título">
+      </div>
     </div>
 
-  </div>
+    <div id="declineMsg" class="decline-msg form-hidden" data-en="We will miss you dearly, but thank you for letting us know." data-es="Te extrañaremos mucho, pero gracias por avisarnos.">
+      We will miss you dearly, but thank you for letting us know.
+    </div>
+
+    <input type="hidden" id="rsvpAttendance" value="">
+    <button type="submit" class="submit-btn" data-en="Send RSVP" data-es="Enviar RSVP">Send RSVP</button>
+    <p class="form-note" id="rsvpNote" data-en="Please submit once for each guest in your party." data-es="Por favor envíe uno por cada invitado en su grupo.">Please submit once for each guest in your party.</p>
+  </form>
 </section>
 
+<!-- FOOTER -->
+<footer class="site-footer" id="siteFooter">
+  <div class="footer-initials">D & J</div>
+  <hr class="footer-rule">
+  <div class="footer-date">07 · 07 · 27</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Navigation Tabs
+  const navTabs = document.querySelectorAll('.nav-tab');
+  const panels = document.querySelectorAll('.tab-panel');
+  const footer = document.getElementById('siteFooter');
+
+  function switchTab(targetId) {
+    panels.forEach(p => p.classList.remove('active'));
+    navTabs.forEach(t => t.classList.remove('on'));
+
+    const targetPanel = document.getElementById(targetId);
+    if (targetPanel) {
+      targetPanel.classList.add('active');
+    }
+
+    navTabs.forEach(t => {
+      if (t.getAttribute('data-s') === targetId) {
+        t.classList.add('on');
+      }
+    });
+
+    if (targetId === 'hero') {
+      footer.classList.add('hidden');
+    } else {
+      footer.classList.remove('hidden');
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    triggerReveals();
+  }
+
+  navTabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      const s = tab.getAttribute('data-s');
+      switchTab(s);
+    });
+  });
+
+  // Scroll Reveals
+  function triggerReveals() {
+    const activePanel = document.querySelector('.tab-panel.active');
+    if (!activePanel) return;
+    const rvs = activePanel.querySelectorAll('.rv');
+    rvs.forEach((el, idx) => {
+      setTimeout(() => {
+        el.classList.add('vis');
+      }, idx * 80);
+    });
+  }
+  triggerReveals();
+
+  // Language Toggle
+  const langToggle = document.getElementById('langToggle');
+  let currentLang = 'en';
+
+  langToggle.addEventListener('click', () => {
+    currentLang = currentLang === 'en' ? 'es' : 'en';
+    langToggle.textContent = langToggle.getAttribute(`data-${currentLang}`);
+
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const val = el.getAttribute(`data-${currentLang}`);
+      if (val) {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = val;
+        } else {
+          el.innerHTML = val;
+        }
+      }
+    });
+
+    document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+      const val = el.getAttribute(`data-${currentLang}-placeholder`);
+      if (val) {
+        el.placeholder = val;
+      }
+    });
+  });
+
+  // RSVP Form Interactivity
+  const attendToggle = document.getElementById('attendToggle');
+  if (attendToggle) {
+    const buttons = attendToggle.querySelectorAll('.toggle-btn');
+    const attendingFields = document.getElementById('attendingFields');
+    const declineMsg = document.getElementById('declineMsg');
+    const rsvpAttendance = document.getElementById('rsvpAttendance');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        const val = btn.getAttribute('data-val');
+        rsvpAttendance.value = val;
+
+        if (val === 'yes') {
+          attendingFields.classList.remove('form-hidden');
+          declineMsg.classList.add('form-hidden');
+        } else {
+          attendingFields.classList.add('form-hidden');
+          declineMsg.classList.remove('form-hidden');
+        }
+      });
+    });
+  }
+});
+</script>
 </body>
 </html>
