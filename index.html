@@ -176,13 +176,20 @@ body{
 .travel-timeline{
   position:relative;
   padding-left:2.2em;
-  margin-top: 0.5in;
-  margin-bottom: 0.5in;
+  padding-top:0.5in;
+  padding-bottom:0.5in;
 }
 .travel-timeline::before{
   content:'';position:absolute;
-  left:6px;top:0.5in;bottom:0.5in;
-  width:2px;background:var(--gold);
+  left:6px;top:calc(0.5in - 20px);bottom:calc(0.5in - 20px);
+  width:2px;
+  background:linear-gradient(
+    to bottom,
+    rgba(212, 175, 55, 0) 0%,
+    var(--gold) 20px,
+    var(--gold) calc(100% - 20px),
+    rgba(212, 175, 55, 0) 100%
+  );
 }
 .travel-item{position:relative;margin-bottom:33px;}
 .travel-item:last-child{margin-bottom:0;}
@@ -610,141 +617,8 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
         <button type="button" class="toggle-btn" data-val="no" data-en="Regretfully, I cannot" data-es="Con pesar, no podré">Regretfully, I cannot</button>
       </div>
     </div>
-
-    <div id="attendingFields" class="form-hidden">
-      <div class="form-group">
-        <label class="form-label" data-en="Dietary Restrictions or Allergies" data-es="Restricciones Alimentarias o Alergias">Dietary Restrictions or Allergies</label>
-        <input type="text" class="form-input" id="rsvpDiet" placeholder="Let us know if you have any" data-en-placeholder="Let us know if you have any" data-es-placeholder="Háganos saber si tiene alguna">
-      </div>
-      <div class="form-group">
-        <label class="form-label" data-en="Song Request" data-es="Canción Solicitada">Song Request</label>
-        <input type="text" class="form-input" id="rsvpSong" placeholder="Artist and Title" data-en-placeholder="Artist and Title" data-es-placeholder="Artista y Título">
-      </div>
-    </div>
-
-    <div id="declineMsg" class="decline-msg form-hidden" data-en="We will miss you dearly, but thank you for letting us know." data-es="Te extrañaremos mucho, pero gracias por avisarnos.">
-      We will miss you dearly, but thank you for letting us know.
-    </div>
-
-    <input type="hidden" id="rsvpAttendance" value="">
-    <button type="submit" class="submit-btn" data-en="Send RSVP" data-es="Enviar RSVP">Send RSVP</button>
-    <p class="form-note" id="rsvpNote" data-en="Please submit once for each guest in your party." data-es="Por favor envíe uno por cada invitado en su grupo.">Please submit once for each guest in your party.</p>
   </form>
 </section>
 
-<!-- FOOTER -->
-<footer class="site-footer" id="siteFooter">
-  <div class="footer-initials">D & J</div>
-  <hr class="footer-rule">
-  <div class="footer-date">07 · 07 · 27</div>
-</footer>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  // Navigation Tabs
-  const navTabs = document.querySelectorAll('.nav-tab');
-  const panels = document.querySelectorAll('.tab-panel');
-  const footer = document.getElementById('siteFooter');
-
-  function switchTab(targetId) {
-    panels.forEach(p => p.classList.remove('active'));
-    navTabs.forEach(t => t.classList.remove('on'));
-
-    const targetPanel = document.getElementById(targetId);
-    if (targetPanel) {
-      targetPanel.classList.add('active');
-    }
-
-    navTabs.forEach(t => {
-      if (t.getAttribute('data-s') === targetId) {
-        t.classList.add('on');
-      }
-    });
-
-    if (targetId === 'hero') {
-      footer.classList.add('hidden');
-    } else {
-      footer.classList.remove('hidden');
-    }
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    triggerReveals();
-  }
-
-  navTabs.forEach(tab => {
-    tab.addEventListener('click', (e) => {
-      e.preventDefault();
-      const s = tab.getAttribute('data-s');
-      switchTab(s);
-    });
-  });
-
-  // Scroll Reveals
-  function triggerReveals() {
-    const activePanel = document.querySelector('.tab-panel.active');
-    if (!activePanel) return;
-    const rvs = activePanel.querySelectorAll('.rv');
-    rvs.forEach((el, idx) => {
-      setTimeout(() => {
-        el.classList.add('vis');
-      }, idx * 80);
-    });
-  }
-  triggerReveals();
-
-  // Language Toggle
-  const langToggle = document.getElementById('langToggle');
-  let currentLang = 'en';
-
-  langToggle.addEventListener('click', () => {
-    currentLang = currentLang === 'en' ? 'es' : 'en';
-    langToggle.textContent = langToggle.getAttribute(`data-${currentLang}`);
-
-    document.querySelectorAll('[data-en]').forEach(el => {
-      const val = el.getAttribute(`data-${currentLang}`);
-      if (val) {
-        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-          el.placeholder = val;
-        } else {
-          el.innerHTML = val;
-        }
-      }
-    });
-
-    document.querySelectorAll('[data-en-placeholder]').forEach(el => {
-      const val = el.getAttribute(`data-${currentLang}-placeholder`);
-      if (val) {
-        el.placeholder = val;
-      }
-    });
-  });
-
-  // RSVP Form Interactivity
-  const attendToggle = document.getElementById('attendToggle');
-  if (attendToggle) {
-    const buttons = attendToggle.querySelectorAll('.toggle-btn');
-    const attendingFields = document.getElementById('attendingFields');
-    const declineMsg = document.getElementById('declineMsg');
-    const rsvpAttendance = document.getElementById('rsvpAttendance');
-
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        const val = btn.getAttribute('data-val');
-        rsvpAttendance.value = val;
-
-        if (val === 'yes') {
-          attendingFields.classList.remove('form-hidden');
-          declineMsg.classList.add('form-hidden');
-        } else {
-          attendingFields.classList.add('form-hidden');
-          declineMsg.classList.remove('form-hidden');
-        }
-      });
-    });
-  }
-});
-</script>
 </body>
 </html>
