@@ -104,7 +104,7 @@ body{
   margin:0 auto 29px;
 }
 
-/* ── SECTION TITLES ── */
+/* ── SECTION TITLES — Heading role ── */
 .section-title{
   font-family:'Cormorant SC',serif;
   font-weight:500;font-size:33pt;
@@ -176,20 +176,20 @@ body{
 .travel-timeline{
   position:relative;
   padding-left:2.2em;
-  padding-top:0.5in;
-  padding-bottom:0.5in;
+  margin-top:0.5in;
+  margin-bottom:0.5in;
+  overflow:visible;
 }
 .travel-timeline::before{
   content:'';position:absolute;
-  left:6px;top:calc(0.5in - 20px);bottom:calc(0.5in - 20px);
-  width:2px;
-  background:linear-gradient(
-    to bottom,
-    rgba(212, 175, 55, 0) 0%,
-    var(--gold) 20px,
-    var(--gold) calc(100% - 20px),
-    rgba(212, 175, 55, 0) 100%
-  );
+  left:4px;top:-2.5em;bottom:-2.5em;
+  width:6px;
+  background:linear-gradient(to bottom,
+    rgba(212,175,55,0) 0%,
+    rgba(212,175,55,1) 10%,
+    rgba(212,175,55,1) 90%,
+    rgba(212,175,55,0) 100%);
+  clip-path:polygon(50% 0%, 100% 10%, 100% 90%, 50% 100%, 0% 90%, 0% 10%);
 }
 .travel-item{position:relative;margin-bottom:33px;}
 .travel-item:last-child{margin-bottom:0;}
@@ -215,6 +215,21 @@ body{
 }
 .travel-item-body a{color:var(--teal);text-decoration:underline;text-underline-offset:2px;}
 .travel-item-body a:hover{color:var(--gold);}
+.things-grid{
+  display:flex;flex-direction:column;
+  gap:0.3em;margin-top:0.3em;
+}
+.things-grid span{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:500;font-size:12pt;color:var(--teal);
+  display:flex;align-items:center;gap:0.4em;
+}
+.things-grid span::before{
+  content:'';display:inline-block;
+  width:4px;height:4px;border-radius:50%;
+  background:var(--teal);flex-shrink:0;
+}
+@media(max-width:600px){.things-grid{gap:0.2em;}}
 .travel-disclaimer{
   font-family:'Cormorant Garamond',serif;
   font-style:italic;font-weight:400;font-size:11pt;
@@ -290,8 +305,16 @@ body{
 }
 
 /* ── RSVP ── */
-.rsvp-form{max-width:555px;margin:0 auto;}
-@media(max-width:600px){.rsvp-form{max-width:333px;}}
+.rsvp-deadline{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:500;font-size:14pt;
+  color:var(--teal);
+  text-align:center;
+  letter-spacing:0.06em;
+  margin-bottom:2rem;
+}
+.rsvp-form{max-width:555px;margin:0 auto;padding:0 1.5em;}
+@media(max-width:600px){.rsvp-form{max-width:333px;padding:0 1em;}}
 .form-group{margin-bottom:33px;}
 .form-label{
   font-family:'Cormorant SC',serif;
@@ -307,7 +330,7 @@ body{
   font-weight:500;font-size:12pt;
   color:var(--teal);
   background:transparent;
-  border:0.5px solid #006B75;
+  border:0.5px solid #00687a;
   border-radius:2px;
   padding:0.6em 0.8em;
   transition:border-color 0.2s;
@@ -320,7 +343,7 @@ body{
   color:rgba(1,96,95,0.4);
   font-style:italic;
 }
-textarea.form-input{min-height:5.5em;resize:vertical;}
+textarea.form-input{min-height:4.5em;resize:vertical;}
 .toggle-group{display:grid;grid-template-columns:1fr 1fr;gap:0.8em;}
 .toggle-btn{
   font-family:'Cormorant SC',serif;
@@ -335,6 +358,25 @@ textarea.form-input{min-height:5.5em;resize:vertical;}
 }
 .toggle-btn:hover{background:var(--teal);color:var(--gold);}
 .toggle-btn.selected{background:var(--teal);color:var(--gold);border-color:var(--teal);}
+.checkbox-row{display:flex;align-items:center;gap:0.6em;}
+.checkbox-row input[type="checkbox"]{
+  -webkit-appearance:none;appearance:none;
+  width:1.1em;height:1.1em;
+  border:1.5px solid var(--teal);
+  border-radius:2px;
+  background:transparent;
+  cursor:pointer;position:relative;flex-shrink:0;
+}
+.checkbox-row input[type="checkbox"]:checked{background:var(--teal);}
+.checkbox-row input[type="checkbox"]:checked::after{
+  content:'✓';color:var(--gold);
+  font-size:0.75em;position:absolute;
+  top:50%;left:50%;transform:translate(-50%,-50%);
+}
+.checkbox-label{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:500;font-size:12pt;color:var(--teal);
+}
 .submit-btn{
   display:block;width:100%;
   font-family:'Cormorant SC',serif;
@@ -347,6 +389,11 @@ textarea.form-input{min-height:5.5em;resize:vertical;}
   margin-top:1.5rem;
 }
 .submit-btn:hover{background:var(--teal);color:var(--gold);}
+.form-note{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-weight:400;font-size:11pt;
+  color:var(--teal);text-align:center;margin-top:0.8rem;
+}
 .form-hidden{display:none;}
 .decline-msg{
   font-family:'Cormorant Garamond',serif;
@@ -544,9 +591,20 @@ textarea.form-input{min-height:5.5em;resize:vertical;}
 
 <!-- RSVP -->
 <section class="section-panel tab-panel" id="rsvp">
-  <form class="rsvp-form content rv" id="rsvpForm">
+  <h2 class="section-title rv">RSVP</h2>
+  <hr class="section-rule rv">
+
+  <p class="rsvp-deadline rv" data-en="Please respond by March 27, 2027." data-es="Por favor responda antes del 27 de marzo de 2027.">Please respond by March 27, 2027.</p>
+
+  <div class="rsvp-form rv" id="rsvpFormWrap">
 
     <div class="form-group">
+      <label class="form-label" data-en="Full Name" data-es="Nombre Completo">Full Name</label>
+      <input type="text" class="form-input" id="rsvpName" placeholder="First and Last Name" data-en-placeholder="First and Last Name" data-es-placeholder="Nombre y Apellido" required>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" data-en="Email" data-es="Correo Electrónico">Email</label>
       <input type="email" class="form-input" id="rsvpEmail" placeholder="name@email.com" data-en-placeholder="name@email.com" data-es-placeholder="nombre@correo.com" required>
     </div>
 
@@ -558,121 +616,236 @@ textarea.form-input{min-height:5.5em;resize:vertical;}
       </div>
     </div>
 
-    <input type="hidden" id="rsvpAttending" value="">
+    <!-- If attending -->
+    <div id="attendingFields" class="form-hidden">
 
-    <!-- FORCED RENDER FIELDS -->
+      <div class="form-group">
+        <label class="form-label" data-en="Will you need transportation on the wedding day?" data-es="¿Necesitarás transporte el día de la boda?">Will you need transportation on the wedding day?</label>
+        <div class="toggle-group" id="transportToggle">
+          <button type="button" class="toggle-btn" data-val="yes" data-en="Yes, please" data-es="Sí, por favor">Yes, please</button>
+          <button type="button" class="toggle-btn" data-val="no" data-en="No, thank you" data-es="No, gracias">No, thank you</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" data-en="What song absolutely needs to play at the reception?" data-es="¿Qué canción no puede faltar en la fiesta?">What song absolutely needs to play at the reception?</label>
+        <input type="text" class="form-input" id="rsvpSong" placeholder="Optional" data-en-placeholder="Optional" data-es-placeholder="Opcional">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" data-en="Dietary Restrictions" data-es="Restricciones Alimentarias">Dietary Restrictions</label>
+        <div class="checkbox-row">
+          <input type="checkbox" id="dietaryCheck">
+          <label class="checkbox-label" for="dietaryCheck" data-en="I have dietary restrictions" data-es="Tengo restricciones alimentarias">I have dietary restrictions</label>
+        </div>
+        <div id="dietaryDetails" class="form-hidden" style="margin-top:0.8em;">
+          <input type="text" class="form-input" id="dietaryText" placeholder="Please describe" data-en-placeholder="Please describe" data-es-placeholder="Por favor describa">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- If declining -->
+    <div id="decliningMsg" class="form-hidden">
+      <p class="decline-msg" data-en="We're sorry you can't join us. Please feel free to contribute to our honeymoon or housewarming fund on the Gifts page." data-es="Lamentamos que no puedas acompañarnos. Si lo deseas, puedes contribuir a nuestro fondo de luna de miel o nuevo hogar en la página de Regalos.">We're sorry you can't join us. Please feel free to contribute to our honeymoon or housewarming fund on the Gifts page.</p>
+    </div>
+
+    <!-- Asked of everyone -->
     <div class="form-group">
-      <label class="form-label" data-en="Would you like to share a few words of love and well wishes?" data-es="¿Te gustaría compartir unas palabras de amor y buenos deseos?">Would you like to share a few words of love and well wishes?</label>
-      <textarea class="form-input" id="rsvpWishes" placeholder="A few words for the newlyweds" data-en-placeholder="A few words for the newlyweds" data-es-placeholder="Unas palabras para los recién casados"></textarea>
+      <label class="form-label" data-en="Would you like to share a few words of love and well wishes?" data-es="¿Quisieras compartir unas palabras de amor y buenos deseos?">Would you like to share a few words of love and well wishes?</label>
+      <textarea class="form-input" id="rsvpWishes" placeholder="Optional" data-en-placeholder="Optional" data-es-placeholder="Opcional"></textarea>
     </div>
 
     <div class="form-group">
-      <label class="form-label" data-en="Just for fun, where should we go on our honeymoon?" data-es="Solo por diversión, ¿a dónde deberíamos ir en nuestra luna de miel?">Just for fun, where should we go on our honeymoon?</label>
-      <input type="text" class="form-input" id="rsvpHoneymoon" placeholder="A city, a country, a beach — surprise us" data-en-placeholder="A city, a country, a beach — surprise us" data-es-placeholder="Una ciudad, un país, una playa — sorpréndenos">
+      <label class="form-label" data-en="Just for fun, where should we go on our honeymoon?" data-es="Solo por diversión, ¿a dónde deberíamos ir de luna de miel?">Just for fun, where should we go on our honeymoon?</label>
+      <input type="text" class="form-input" id="rsvpHoneymoon" placeholder="Optional" data-en-placeholder="Optional" data-es-placeholder="Opcional">
     </div>
 
-    <div id="noSection" class="form-hidden">
-      <p class="decline-msg" data-en="We will miss you dearly on our special day!" data-es="¡Te extrañaremos mucho en nuestro día especial!">We will miss you dearly on our special day!</p>
-    </div>
+    <button type="button" class="submit-btn" id="submitRsvp" data-en="Send RSVP" data-es="Enviar RSVP">Send RSVP</button>
+    <p class="form-note" id="formStatus"></p>
 
-    <div class="form-group">
-      <button type="submit" class="submit-btn" data-en="Send RSVP" data-es="Enviar RSVP">Send RSVP</button>
-    </div>
-  </form>
+  </div>
 </section>
 
 <!-- FOOTER -->
 <footer class="site-footer" id="siteFooter">
-  <div class="footer-initials">D & J</div>
   <hr class="footer-rule">
+  <div class="footer-initials">D & J</div>
   <div class="footer-date">07 · 07 · 27</div>
 </footer>
 
 <script>
-// Tab Navigation
-const tabs = document.querySelectorAll('.nav-tab');
-const panels = document.querySelectorAll('.tab-panel');
-const footer = document.getElementById('siteFooter');
+(function(){
+  'use strict';
 
-tabs.forEach(tab => {
-  tab.addEventListener('click', (e) => {
-    e.preventDefault();
-    const target = tab.getAttribute('data-s');
-    
-    tabs.forEach(t => t.classList.remove('on'));
-    tab.classList.add('on');
-    
-    panels.forEach(panel => {
-      panel.classList.remove('active', 'hero-section');
-      if(panel.id === target) {
-        panel.classList.add('active');
-        if(target === 'hero') panel.classList.add('hero-section');
+  /* === Tab Navigation === */
+  var tabs = document.querySelectorAll('.nav-tab');
+  var panels = document.querySelectorAll('.tab-panel');
+  var footer = document.getElementById('siteFooter');
+
+  function switchTab(sectionId){
+    panels.forEach(function(p){ p.classList.remove('active'); });
+    tabs.forEach(function(t){ t.classList.remove('on'); });
+
+    var target = document.getElementById(sectionId);
+    var tab = document.querySelector('.nav-tab[data-s="'+sectionId+'"]');
+    if(target) target.classList.add('active');
+    if(tab) tab.classList.add('on');
+
+    // Footer hidden on Home, visible on all others
+    if(footer){
+      if(sectionId === 'hero'){
+        footer.classList.add('hidden');
+      } else {
+        footer.classList.remove('hidden');
+      }
+    }
+
+    window.scrollTo(0,0);
+
+    // Trigger reveals
+    setTimeout(function(){
+      var els = target ? target.querySelectorAll('.rv') : [];
+      els.forEach(function(el, i){
+        setTimeout(function(){ el.classList.add('vis'); }, i * 80);
+      });
+    }, 50);
+  }
+
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(e){
+      e.preventDefault();
+      switchTab(t.getAttribute('data-s'));
+    });
+  });
+
+  // Initial: hide footer on hero, trigger hero reveals
+  if(footer) footer.classList.add('hidden');
+  var heroEls = document.querySelectorAll('#hero .rv');
+  heroEls.forEach(function(el, i){
+    setTimeout(function(){ el.classList.add('vis'); }, 200 + i * 120);
+  });
+
+  /* === Language Toggle === */
+  var lang = 'en';
+  var toggle = document.getElementById('langToggle');
+
+  toggle.addEventListener('click', function(){
+    lang = (lang === 'en') ? 'es' : 'en';
+    toggle.textContent = toggle.getAttribute('data-' + lang);
+
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      var val = el.getAttribute('data-' + lang);
+      if(val !== null){
+        if(el.tagName === 'INPUT' && el.type !== 'checkbox') return;
+        if(el.tagName === 'TEXTAREA') return;
+        el.innerHTML = val;
       }
     });
 
-    if(target === 'hero') {
-      footer.classList.add('hidden');
-    } else {
-      footer.classList.remove('hidden');
-    }
-    window.scrollTo({top: 0, behavior: 'smooth'});
+    document.querySelectorAll('[data-'+lang+'-placeholder]').forEach(function(el){
+      var ph = el.getAttribute('data-'+lang+'-placeholder');
+      if(ph !== null) el.placeholder = ph;
+    });
   });
-});
 
-// RSVP Toggle logic
-const attendBtns = document.querySelectorAll('#attendToggle .toggle-btn');
-const attendingInput = document.getElementById('rsvpAttending');
-const noSection = document.getElementById('noSection');
+  /* === RSVP Form Logic === */
+  var attendToggle = document.getElementById('attendToggle');
+  var attendingFields = document.getElementById('attendingFields');
+  var decliningMsg = document.getElementById('decliningMsg');
+  var attending = null;
+  var transport = null;
 
-attendBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    attendBtns.forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    const val = btn.getAttribute('data-val');
-    attendingInput.value = val;
-    if(val === 'yes') {
-      noSection.classList.add('form-hidden');
-    } else {
-      noSection.classList.remove('form-hidden');
-    }
-  });
-});
-
-// Scroll Reveal observer
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting) {
-      entry.target.classList.add('vis');
-    }
-  });
-}, {threshold: 0.1});
-
-document.querySelectorAll('.rv').forEach(el => observer.observe(el));
-
-// Language Toggle functionality
-const langToggle = document.getElementById('langToggle');
-let currentLang = 'en';
-
-langToggle.addEventListener('click', () => {
-  currentLang = currentLang === 'en' ? 'es' : 'en';
-  langToggle.textContent = langToggle.getAttribute(`data-${currentLang === 'en' ? 'es' : 'en'}`);
-  
-  document.querySelectorAll('[data-en]').forEach(el => {
-    const text = el.getAttribute(`data-${currentLang}`);
-    if(text) {
-      if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-        el.placeholder = text;
+  attendToggle.querySelectorAll('.toggle-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      attendToggle.querySelectorAll('.toggle-btn').forEach(function(b){ b.classList.remove('selected'); });
+      btn.classList.add('selected');
+      attending = btn.getAttribute('data-val');
+      if(attending === 'yes'){
+        attendingFields.classList.remove('form-hidden');
+        decliningMsg.classList.add('form-hidden');
       } else {
-        el.innerHTML = text;
+        attendingFields.classList.add('form-hidden');
+        decliningMsg.classList.remove('form-hidden');
       }
-    }
+    });
   });
 
-  document.querySelectorAll('[data-en-placeholder]').forEach(el => {
-    const ph = el.getAttribute(`data-${currentLang}-placeholder`);
-    if(ph) el.placeholder = ph;
+  var transportToggle = document.getElementById('transportToggle');
+  transportToggle.querySelectorAll('.toggle-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      transportToggle.querySelectorAll('.toggle-btn').forEach(function(b){ b.classList.remove('selected'); });
+      btn.classList.add('selected');
+      transport = btn.getAttribute('data-val');
+    });
   });
-});
+
+  var dietaryCheck = document.getElementById('dietaryCheck');
+  var dietaryDetails = document.getElementById('dietaryDetails');
+  dietaryCheck.addEventListener('change', function(){
+    dietaryDetails.style.display = dietaryCheck.checked ? 'block' : 'none';
+  });
+
+  var submitBtn = document.getElementById('submitRsvp');
+  var formStatus = document.getElementById('formStatus');
+
+  submitBtn.addEventListener('click', function(){
+    var name = document.getElementById('rsvpName').value.trim();
+    var email = document.getElementById('rsvpEmail').value.trim();
+
+    if(!name || !email){
+      formStatus.textContent = lang === 'en' ? 'Please fill in your name and email.' : 'Por favor complete su nombre y correo.';
+      formStatus.style.color = '#006B75';
+      return;
+    }
+    if(attending === null){
+      formStatus.textContent = lang === 'en' ? 'Please let us know if you\'ll be joining us.' : 'Por favor indique si nos acompañará.';
+      formStatus.style.color = '#006B75';
+      return;
+    }
+
+    var data = {
+      name: name,
+      email: email,
+      attending: attending,
+      transport: transport || '',
+      song: (document.getElementById('rsvpSong').value || '').trim(),
+      dietary: dietaryCheck.checked ? (document.getElementById('dietaryText').value || '').trim() : '',
+      wishes: (document.getElementById('rsvpWishes').value || '').trim(),
+      honeymoon: (document.getElementById('rsvpHoneymoon').value || '').trim(),
+      language: lang
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = lang === 'en' ? 'Sending...' : 'Enviando...';
+
+    // Replace this URL with your Google Apps Script webhook
+    var webhookUrl = 'YOUR_GOOGLE_APPS_SCRIPT_WEBHOOK_URL';
+
+    fetch(webhookUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    }).then(function(){
+      formStatus.textContent = lang === 'en' ? 'Thank you! Your RSVP has been received.' : '¡Gracias! Su confirmación ha sido recibida.';
+      formStatus.style.color = '#D4AF37';
+      submitBtn.textContent = lang === 'en' ? 'Sent' : 'Enviado';
+    }).catch(function(){
+      formStatus.textContent = lang === 'en' ? 'Something went wrong. Please try again or reach out to us directly.' : 'Algo salió mal. Por favor intente de nuevo o contáctenos directamente.';
+      submitBtn.disabled = false;
+      submitBtn.textContent = lang === 'en' ? 'Send RSVP' : 'Enviar RSVP';
+    });
+  });
+
+  /* === Prefers Reduced Motion === */
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('.rv').forEach(function(el){
+      el.classList.add('vis');
+    });
+  }
+
+})();
 </script>
 </body>
 </html>
