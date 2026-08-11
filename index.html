@@ -104,7 +104,7 @@ body{
   margin:0 auto 29px;
 }
 
-/* ── SECTION TITLES — Heading role ── */
+/* ── SECTION TITLES ── */
 .section-title{
   font-family:'Cormorant SC',serif;
   font-weight:500;font-size:33pt;
@@ -196,10 +196,8 @@ body{
 .travel-item::before{
   content:'';position:absolute;
   left:-2.2em;top:0.25em;
-  width:0;height:0;
-  border:0;
-  background:var(--gold);
   width:8px;height:8px;border-radius:50%;
+  background:var(--gold);
   transform:translateX(3px);
 }
 .travel-item-title{
@@ -217,21 +215,6 @@ body{
 }
 .travel-item-body a{color:var(--teal);text-decoration:underline;text-underline-offset:2px;}
 .travel-item-body a:hover{color:var(--gold);}
-.things-grid{
-  display:flex;flex-direction:column;
-  gap:0.3em;margin-top:0.3em;
-}
-.things-grid span{
-  font-family:'Cormorant Garamond',serif;
-  font-weight:500;font-size:12pt;color:var(--teal);
-  display:flex;align-items:center;gap:0.4em;
-}
-.things-grid span::before{
-  content:'';display:inline-block;
-  width:4px;height:4px;border-radius:50%;
-  background:var(--teal);flex-shrink:0;
-}
-@media(max-width:600px){.things-grid{gap:0.2em;}}
 .travel-disclaimer{
   font-family:'Cormorant Garamond',serif;
   font-style:italic;font-weight:400;font-size:11pt;
@@ -577,6 +560,7 @@ textarea.form-input{min-height:5.5em;resize:vertical;}
 
     <input type="hidden" id="rsvpAttending" value="">
 
+    <!-- RESTORED FIELDS -->
     <div id="yesSection" class="form-hidden">
       <div class="form-group">
         <label class="form-label" data-en="Would you like to share a few words of love and well wishes?" data-es="¿Te gustaría compartir unas palabras de amor y buenos deseos?">Would you like to share a few words of love and well wishes?</label>
