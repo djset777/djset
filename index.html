@@ -173,24 +173,15 @@ body{
   max-width:666px;margin:0 auto 2rem;
   padding:0 1.5em;
 }
-
-.travel-timeline {
-  position: relative;
-  padding-left: 2.2em;
-  margin-top: 3.5rem;
-  margin-bottom: 3.5rem;
+.travel-timeline{
+  position:relative;
+  padding-left:2.2em;
 }
-.travel-timeline::before {
-  content: '';
-  position: absolute;
-  left: 6px;
-  top: -1.7rem;
-  bottom: -1.7rem;
-  width: 2px;
-  background: var(--gold);
-  clip-path: polygon(50% 0%, 100% 4%, 100% 96%, 50% 100%, 0% 96%, 0% 4%);
+.travel-timeline::before{
+  content:'';position:absolute;
+  left:6px;top:0;bottom:0;
+  width:2px;background:var(--gold);
 }
-
 .travel-item{position:relative;margin-bottom:33px;}
 .travel-item:last-child{margin-bottom:0;}
 .travel-item::before{
@@ -619,109 +610,182 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
     </div>
 
     <div id="attendingFields" class="form-hidden">
+
       <div class="form-group">
-        <label class="form-label" data-en="Dietary Restrictions" data-es="Restricciones Dietéticas">Dietary Restrictions</label>
-        <textarea class="form-input" id="rsvpDiet" placeholder="Please list any allergies or dietary requirements" data-en-placeholder="Please list any allergies or dietary requirements" data-es-placeholder="Por favor indique alergias o requisitos dietéticos"></textarea>
+        <label class="form-label" data-en="Will you need transportation on the wedding day?" data-es="¿Necesitarás transporte el día de la boda?">Will you need transportation on the wedding day?</label>
+        <div class="toggle-group" id="transportToggle">
+          <button type="button" class="toggle-btn" data-val="yes" data-en="Yes, please" data-es="Sí, por favor">Yes, please</button>
+          <button type="button" class="toggle-btn" data-val="no" data-en="No, thank you" data-es="No, gracias">No, thank you</button>
+        </div>
       </div>
+
+      <div class="form-group">
+        <label class="form-label" data-en="What song absolutely needs to play at the reception?" data-es="¿Qué canción no puede faltar en la fiesta?">What song absolutely needs to play at the reception?</label>
+        <input type="text" class="form-input" id="rsvpSong" placeholder="Artist — Song title" data-en-placeholder="Artist — Song title" data-es-placeholder="Artista — Título de canción">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" data-en="Dietary Restrictions" data-es="Restricciones Alimentarias">Dietary Restrictions</label>
+        <div class="checkbox-row">
+          <input type="checkbox" id="dietaryCheck">
+          <label class="checkbox-label" for="dietaryCheck" data-en="I have dietary restrictions" data-es="Tengo restricciones alimentarias">I have dietary restrictions</label>
+        </div>
+        <div id="dietaryDetails" class="form-hidden" style="margin-top:0.6em;">
+          <input type="text" class="form-input" id="dietaryText" placeholder="e.g. vegetarian, shellfish allergy" data-en-placeholder="e.g. vegetarian, shellfish allergy" data-es-placeholder="ej. vegetariano, alergia a mariscos">
+        </div>
+      </div>
+
     </div>
-    
-    <button type="button" class="submit-btn" data-en="Send RSVP" data-es="Enviar Confirmación">Send RSVP</button>
+
+    <div id="decliningMsg" class="form-hidden">
+      <p class="decline-msg" data-en="We're sorry you can't join us. Please feel free to contribute to our honeymoon or housewarming fund on the Gifts page." data-es="Lamentamos que no puedas acompañarnos. Si lo deseas, puedes contribuir a nuestro fondo de luna de miel o nuevo hogar en la página de Regalos.">We're sorry you can't join us. Please feel free to contribute to our honeymoon or housewarming fund on the Gifts page.</p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" data-en="Would you like to share a few words of love and well wishes?" data-es="¿Quisieras compartir unas palabras de amor y buenos deseos?">Would you like to share a few words of love and well wishes?</label>
+      <textarea class="form-input" id="rsvpWishes" placeholder="A few words for the newlyweds" data-en-placeholder="A few words for the newlyweds" data-es-placeholder="Unas palabras para los novios"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" data-en="Just for fun, where should we go on our honeymoon?" data-es="Solo por diversión, ¿a dónde deberíamos ir de luna de miel?">Just for fun, where should we go on our honeymoon?</label>
+      <input type="text" class="form-input" id="rsvpHoneymoon" placeholder="A city, a country, a beach — surprise us" data-en-placeholder="A city, a country, a beach — surprise us" data-es-placeholder="Una ciudad, un país, una playa — sorpréndanos">
+    </div>
+
+    <button type="button" class="submit-btn" id="submitRsvp" data-en="Send RSVP" data-es="Enviar RSVP">Send RSVP</button>
+    <p class="form-note" id="formStatus"></p>
+
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="site-footer rv">
-  <div class="footer-initials">D & J</div>
+<footer class="site-footer hidden">
   <hr class="footer-rule">
+  <div class="footer-initials">D & J</div>
   <div class="footer-date">07 · 07 · 27</div>
 </footer>
 
 <script>
-  // 1. Tab Switching & Re-triggering Reveals
-  const tabs = document.querySelectorAll('.nav-tab');
-  const panels = document.querySelectorAll('.tab-panel');
-
-  function runReveals(container) {
-    // Reset all reveals in the container
-    const reveals = container.querySelectorAll('.rv');
-    reveals.forEach(el => el.classList.remove('vis'));
-    
-    // Stagger their fade-in
-    reveals.forEach((el, index) => {
-      setTimeout(() => {
-        el.classList.add('vis');
-      }, index * 100); 
-    });
+(function(){
+  'use strict';
+  var tabs=document.querySelectorAll('.nav-tab');
+  var panels=document.querySelectorAll('.tab-panel');
+  function switchTab(id){
+    panels.forEach(function(p){p.classList.remove('active');});
+    tabs.forEach(function(t){t.classList.remove('on');});
+    var target=document.getElementById(id);
+    var tab=document.querySelector('.nav-tab[data-s="'+id+'"]');
+    var footer=document.querySelector('.site-footer');
+    if(target)target.classList.add('active');
+    if(tab)tab.classList.add('on');
+    if(footer){if(id==='hero')footer.classList.add('hidden');else footer.classList.remove('hidden');}
+    window.scrollTo(0,0);
+    setTimeout(function(){
+      var els=target?target.querySelectorAll('.rv'):[];
+      els.forEach(function(el,i){
+        setTimeout(function(){el.classList.add('vis');},i*80);
+      });
+    },50);
   }
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', (e) => {
-      e.preventDefault();
-      
-      // Update active tab styling
-      tabs.forEach(t => t.classList.remove('on'));
-      tab.classList.add('on');
-      
-      // Hide all panels, show the selected one
-      panels.forEach(p => p.classList.remove('active'));
-      const activePanel = document.getElementById(tab.dataset.s);
-      activePanel.classList.add('active');
-      
-      // Run the animations on the newly active panel
-      runReveals(activePanel);
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(e){
+      e.preventDefault();switchTab(t.getAttribute('data-s'));
     });
   });
+  var heroEls=document.querySelectorAll('#hero .rv');
+  heroEls.forEach(function(el,i){
+    setTimeout(function(){el.classList.add('vis');},200+i*120);
+  });
 
-  // 2. Language Toggle Logic
-  const langBtn = document.getElementById('langToggle');
-  let currentLang = 'en';
-
-  langBtn.addEventListener('click', () => {
-    currentLang = currentLang === 'en' ? 'es' : 'en';
-    
-    // Update the button text itself
-    langBtn.textContent = langBtn.getAttribute(`data-${currentLang === 'en' ? 'es' : 'en'}`);
-    
-    // Update all translatable elements
-    const translatable = document.querySelectorAll('[data-en]');
-    translatable.forEach(el => {
-      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-        el.placeholder = el.getAttribute(`data-${currentLang}-placeholder`);
-      } else {
-        el.innerHTML = el.getAttribute(`data-${currentLang}`);
+  var lang='en';
+  var toggle=document.getElementById('langToggle');
+  toggle.addEventListener('click',function(){
+    lang=(lang==='en')?'es':'en';
+    toggle.textContent=toggle.getAttribute('data-'+lang);
+    document.querySelectorAll('[data-en]').forEach(function(el){
+      var val=el.getAttribute('data-'+lang);
+      if(val!==null){
+        if((el.tagName==='INPUT'&&el.type!=='checkbox')||el.tagName==='TEXTAREA'){}
+        else{el.innerHTML=val;}
       }
     });
+    document.querySelectorAll('[data-'+lang+'-placeholder]').forEach(function(el){
+      var ph=el.getAttribute('data-'+lang+'-placeholder');
+      if(ph!==null)el.placeholder=ph;
+    });
   });
 
-  // 3. RSVP Toggle Logic
-  const attendBtns = document.querySelectorAll('#attendToggle .toggle-btn');
-  const attendingFields = document.getElementById('attendingFields');
-
-  attendBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      attendBtns.forEach(b => b.classList.remove('selected'));
+  var attendToggle=document.getElementById('attendToggle');
+  var attendingFields=document.getElementById('attendingFields');
+  var decliningMsg=document.getElementById('decliningMsg');
+  var attending=null,transport=null;
+  attendToggle.querySelectorAll('.toggle-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      attendToggle.querySelectorAll('.toggle-btn').forEach(function(b){b.classList.remove('selected');});
       btn.classList.add('selected');
-      
-      if(btn.dataset.val === 'yes') {
-        attendingFields.classList.remove('form-hidden');
-      } else {
-        attendingFields.classList.add('form-hidden');
-      }
+      attending=btn.getAttribute('data-val');
+      if(attending==='yes'){attendingFields.classList.remove('form-hidden');decliningMsg.classList.add('form-hidden');}
+      else{attendingFields.classList.add('form-hidden');decliningMsg.classList.remove('form-hidden');}
+    });
+  });
+  var transportToggle=document.getElementById('transportToggle');
+  transportToggle.querySelectorAll('.toggle-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      transportToggle.querySelectorAll('.toggle-btn').forEach(function(b){b.classList.remove('selected');});
+      btn.classList.add('selected');
+      transport=btn.getAttribute('data-val');
+    });
+  });
+  var dietaryCheck=document.getElementById('dietaryCheck');
+  var dietaryDetails=document.getElementById('dietaryDetails');
+  dietaryCheck.addEventListener('change',function(){
+    if(dietaryCheck.checked)dietaryDetails.classList.remove('form-hidden');
+    else dietaryDetails.classList.add('form-hidden');
+  });
+
+  var submitBtn=document.getElementById('submitRsvp');
+  var formStatus=document.getElementById('formStatus');
+  submitBtn.addEventListener('click',function(){
+    var name=document.getElementById('rsvpName').value.trim();
+    var email=document.getElementById('rsvpEmail').value.trim();
+    if(!name||!email){
+      formStatus.textContent=lang==='en'?'Please fill in your name and email.':'Por favor complete su nombre y correo.';
+      formStatus.style.color='#006B75';return;
+    }
+    if(attending===null){
+      formStatus.textContent=lang==='en'?"Please let us know if you'll be joining us.":'Por favor indique si nos acompañará.';
+      formStatus.style.color='#006B75';return;
+    }
+    var data={
+      name:name,email:email,attending:attending,
+      transport:transport||'',
+      song:(document.getElementById('rsvpSong').value||'').trim(),
+      dietary:dietaryCheck.checked?(document.getElementById('dietaryText').value||'').trim():'',
+      wishes:(document.getElementById('rsvpWishes').value||'').trim(),
+      honeymoon:(document.getElementById('rsvpHoneymoon').value||'').trim(),
+      language:lang
+    };
+    submitBtn.disabled=true;
+    submitBtn.textContent=lang==='en'?'Sending...':'Enviando...';
+    var webhookUrl='YOUR_GOOGLE_APPS_SCRIPT_WEBHOOK_URL';
+    fetch(webhookUrl,{
+      method:'POST',mode:'no-cors',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(data)
+    }).then(function(){
+      formStatus.textContent=lang==='en'?'Thank you! Your RSVP has been received.':'¡Gracias! Su confirmación ha sido recibida.';
+      formStatus.style.color='#D4AF37';
+      submitBtn.textContent=lang==='en'?'Sent':'Enviado';
+    }).catch(function(){
+      formStatus.textContent=lang==='en'?'Something went wrong. Please try again or reach out to us directly.':'Algo salió mal. Por favor intente de nuevo o contáctenos directamente.';
+      submitBtn.disabled=false;
+      submitBtn.textContent=lang==='en'?'Send RSVP':'Enviar RSVP';
     });
   });
 
-  // 4. Run reveals on the initially active panel on page load
-  window.addEventListener('DOMContentLoaded', () => {
-    runReveals(document.querySelector('.tab-panel.active'));
-    
-    // Also trigger footer reveal
-    const footer = document.querySelector('.site-footer');
-    if (footer) {
-      setTimeout(() => {
-        footer.classList.add('vis');
-      }, 600);
-    }
-  });
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.querySelectorAll('.rv').forEach(function(el){el.classList.add('vis');});
+  }
+})();
 </script>
 </body>
 </html>
