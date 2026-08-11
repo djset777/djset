@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --teal:#01605F;
+  --teal:#006B75;
   --forest:#014421;
   --navy:#003153;
   --gold:#D4AF37;
@@ -324,7 +324,7 @@ body{
   font-weight:500;font-size:12pt;
   color:var(--teal);
   background:transparent;
-  border:0.5px solid #00687a;
+  border:0.5px solid #006B75;
   border-radius:2px;
   padding:0.6em 0.8em;
   transition:border-color 0.2s;
@@ -750,11 +750,11 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
     var email=document.getElementById('rsvpEmail').value.trim();
     if(!name||!email){
       formStatus.textContent=lang==='en'?'Please fill in your name and email.':'Por favor complete su nombre y correo.';
-      formStatus.style.color='#01605F';return;
+      formStatus.style.color='#006B75';return;
     }
     if(attending===null){
       formStatus.textContent=lang==='en'?"Please let us know if you'll be joining us.":'Por favor indique si nos acompañará.';
-      formStatus.style.color='#01605F';return;
+      formStatus.style.color='#006B75';return;
     }
     var data={
       name:name,email:email,attending:attending,
