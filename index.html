@@ -39,16 +39,29 @@ body{
 .nav-tabs{display:flex;gap:2.2em;align-items:center;}
 .nav-tab{
   font-family:'Cormorant SC',serif;
-  font-weight:400;font-size:14pt;
+  font-weight:500;font-size:14pt;
   color:var(--teal);
   text-decoration:none;cursor:pointer;
   padding:0.2em 0;
-  border-bottom:1.5px solid transparent;
-  transition:color 0.2s,border-color 0.2s;
+  position:relative;
+  transition:color 0.2s;
   letter-spacing:0.06em;
 }
+.nav-tab::after{
+  content:'';position:absolute;
+  left:0;right:0;bottom:0;
+  height:1.5px;
+  background:linear-gradient(to right,
+    rgba(212,175,55,0) 0%,
+    rgba(212,175,55,1) 15%,
+    rgba(212,175,55,1) 85%,
+    rgba(212,175,55,0) 100%);
+  opacity:0;
+  transition:opacity 0.2s;
+}
 .nav-tab:hover{color:var(--gold);}
-.nav-tab.on{color:var(--gold);border-bottom-color:var(--gold);}
+.nav-tab.on{color:var(--gold);}
+.nav-tab.on::after{opacity:1;}
 .lang-toggle{
   position:absolute;left:1.5em;
   font-family:'Cormorant SC',serif;font-weight:600;
