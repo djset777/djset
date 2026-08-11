@@ -14,7 +14,7 @@
   --forest:#014421;
   --navy:#003153;
   --gold:#D4AF37;
-  --cream:#FAF7F3;
+  --cream:#F5F0E8;
   --ink:#004B49;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -307,14 +307,6 @@ body{
 }
 
 /* ── RSVP ── */
-.rsvp-deadline{
-  font-family:'Cormorant Garamond',serif;
-  font-weight:500;font-size:14pt;
-  color:var(--teal);
-  text-align:center;
-  letter-spacing:0.06em;
-  margin-bottom:2rem;
-}
 .rsvp-form{max-width:555px;margin:0 auto;}
 @media(max-width:600px){.rsvp-form{max-width:333px;}}
 .form-group{margin-bottom:33px;}
@@ -345,7 +337,7 @@ body{
   color:rgba(1,96,95,0.4);
   font-style:italic;
 }
-textarea.form-input{min-height:4.5em;resize:vertical;}
+textarea.form-input{min-height:5.5em;resize:vertical;}
 .toggle-group{display:grid;grid-template-columns:1fr 1fr;gap:0.8em;}
 .toggle-btn{
   font-family:'Cormorant SC',serif;
@@ -360,25 +352,6 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
 }
 .toggle-btn:hover{background:var(--teal);color:var(--gold);}
 .toggle-btn.selected{background:var(--teal);color:var(--gold);border-color:var(--teal);}
-.checkbox-row{display:flex;align-items:center;gap:0.6em;}
-.checkbox-row input[type="checkbox"]{
-  -webkit-appearance:none;appearance:none;
-  width:1.1em;height:1.1em;
-  border:1.5px solid var(--teal);
-  border-radius:2px;
-  background:transparent;
-  cursor:pointer;position:relative;flex-shrink:0;
-}
-.checkbox-row input[type="checkbox"]:checked{background:var(--teal);}
-.checkbox-row input[type="checkbox"]:checked::after{
-  content:'✓';color:var(--gold);
-  font-size:0.75em;position:absolute;
-  top:50%;left:50%;transform:translate(-50%,-50%);
-}
-.checkbox-label{
-  font-family:'Cormorant Garamond',serif;
-  font-weight:500;font-size:12pt;color:var(--teal);
-}
 .submit-btn{
   display:block;width:100%;
   font-family:'Cormorant SC',serif;
@@ -391,11 +364,6 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
   margin-top:1.5rem;
 }
 .submit-btn:hover{background:var(--teal);color:var(--gold);}
-.form-note{
-  font-family:'Cormorant Garamond',serif;
-  font-style:italic;font-weight:400;font-size:11pt;
-  color:var(--teal);text-align:center;margin-top:0.8rem;
-}
 .form-hidden{display:none;}
 .decline-msg{
   font-family:'Cormorant Garamond',serif;
@@ -593,20 +561,9 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
 
 <!-- RSVP -->
 <section class="section-panel tab-panel" id="rsvp">
-  <h2 class="section-title rv">RSVP</h2>
-  <hr class="section-rule rv">
-
-  <p class="rsvp-deadline rv" data-en="Please respond by March 27, 2027." data-es="Por favor responda antes del 27 de marzo de 2027.">Please respond by March 27, 2027.</p>
-
   <form class="rsvp-form content rv" id="rsvpForm">
 
     <div class="form-group">
-      <label class="form-label" data-en="Full Name" data-es="Nombre Completo">Full Name</label>
-      <input type="text" class="form-input" id="rsvpName" placeholder="First and Last Name" data-en-placeholder="First and Last Name" data-es-placeholder="Nombre y Apellido" required>
-    </div>
-
-    <div class="form-group">
-      <label class="form-label" data-en="Email" data-es="Correo Electrónico">Email</label>
       <input type="email" class="form-input" id="rsvpEmail" placeholder="name@email.com" data-en-placeholder="name@email.com" data-es-placeholder="nombre@correo.com" required>
     </div>
 
@@ -622,13 +579,13 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
 
     <div id="yesSection" class="form-hidden">
       <div class="form-group">
-        <label class="form-label" data-en="Dietary Restrictions or Allergies" data-es="Restricciones Alimentarias o Alergias">Dietary Restrictions or Allergies</label>
-        <textarea class="form-input" id="rsvpDietary" placeholder="Let us know if you have any dietary needs..." data-en-placeholder="Let us know if you have any dietary needs..." data-es-placeholder="Háganos saber si tiene alguna necesidad alimentaria..."></textarea>
+        <label class="form-label" data-en="Would you like to share a few words of love and well wishes?" data-es="¿Te gustaría compartir unas palabras de amor y buenos deseos?">Would you like to share a few words of love and well wishes?</label>
+        <textarea class="form-input" id="rsvpWishes" placeholder="A few words for the newlyweds" data-en-placeholder="A few words for the newlyweds" data-es-placeholder="Unas palabras para los recién casados"></textarea>
       </div>
 
       <div class="form-group">
-        <label class="form-label" data-en="Song Request" data-es="Canción Solicitada">Song Request</label>
-        <input type="text" class="form-input" id="rsvpSong" placeholder="Artist - Song Title" data-en-placeholder="Artist - Song Title" data-es-placeholder="Artista - Título de la Canción">
+        <label class="form-label" data-en="Just for fun, where should we go on our honeymoon?" data-es="Solo por diversión, ¿a dónde deberíamos ir en nuestra luna de miel?">Just for fun, where should we go on our honeymoon?</label>
+        <input type="text" class="form-input" id="rsvpHoneymoon" placeholder="A city, a country, a beach — surprise us" data-en-placeholder="A city, a country, a beach — surprise us" data-es-placeholder="Una ciudad, un país, una playa — sorpréndenos">
       </div>
     </div>
 
@@ -639,8 +596,6 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
     <div class="form-group">
       <button type="submit" class="submit-btn" data-en="Send RSVP" data-es="Enviar RSVP">Send RSVP</button>
     </div>
-
-    <p class="form-note" id="formNote" data-en="We can't wait to celebrate with you." data-es="Estamos ansiosos por celebrar con ustedes.">We can't wait to celebrate with you.</p>
   </form>
 </section>
 
