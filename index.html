@@ -52,15 +52,15 @@ body{
 .lang-toggle{
   position:absolute;left:1.5em;
   font-family:'Cormorant SC',serif;font-weight:400;
-  font-size:11pt;letter-spacing:0.06em;
-  background:transparent;
+  font-size:12pt;letter-spacing:0.06em;
+  background:var(--gold);
   border:1px solid var(--gold);
   color:var(--teal);
-  padding:0.2em 0.6em;
+  padding:0.25em 0.7em;
   border-radius:2px;cursor:pointer;
   transition:all 0.2s;
 }
-.lang-toggle:hover{background:var(--teal);color:var(--gold);}
+.lang-toggle:hover{background:var(--teal);color:var(--gold);border-color:var(--teal);}
 @media(max-width:600px){
   .nav-bar{
     flex-direction:column;gap:0.5em;
