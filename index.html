@@ -719,7 +719,6 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
     if(target) target.classList.add('active');
     if(tab) tab.classList.add('on');
 
-    // Footer hidden on Home, visible on all others
     if(footer){
       if(sectionId === 'hero'){
         footer.classList.add('hidden');
@@ -730,7 +729,6 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
 
     window.scrollTo(0,0);
 
-    // Trigger reveals
     setTimeout(function(){
       var els = target ? target.querySelectorAll('.rv') : [];
       els.forEach(function(el, i){
@@ -746,7 +744,6 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
     });
   });
 
-  // Initial: hide footer on hero, trigger hero reveals
   if(footer) footer.classList.add('hidden');
   var heroEls = document.querySelectorAll('#hero .rv');
   heroEls.forEach(function(el, i){
@@ -846,8 +843,7 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
     submitBtn.disabled = true;
     submitBtn.textContent = lang === 'en' ? 'Sending...' : 'Enviando...';
 
-    // Replace this URL with your Google Apps Script webhook
-    https://script.google.com/macros/s/AKfycbwosDysXnI_U2t6CGVG7LHLgtj9nTPcpcIeFIuA2fBV623mbdEFtG4FAJFTLe5vA7p3JQ/exec
+    var webhookUrl = 'https://script.google.com/macros/s/AKfycbwosDysXnI_U2t6CGVG7LHLgtj9nTPcpcIeFIuA2fBV623mbdEFtG4FAJFTLe5vA7p3JQ/exec';
 
     fetch(webhookUrl, {
       method: 'POST',
