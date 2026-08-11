@@ -617,8 +617,128 @@ textarea.form-input{min-height:4.5em;resize:vertical;}
         <button type="button" class="toggle-btn" data-val="no" data-en="Regretfully, I cannot" data-es="Con pesar, no podré">Regretfully, I cannot</button>
       </div>
     </div>
+
+    <input type="hidden" id="rsvpAttending" value="">
+
+    <div id="yesSection" class="form-hidden">
+      <div class="form-group">
+        <label class="form-label" data-en="Dietary Restrictions or Allergies" data-es="Restricciones Alimentarias o Alergias">Dietary Restrictions or Allergies</label>
+        <textarea class="form-input" id="rsvpDietary" placeholder="Let us know if you have any dietary needs..." data-en-placeholder="Let us know if you have any dietary needs..." data-es-placeholder="Háganos saber si tiene alguna necesidad alimentaria..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" data-en="Song Request" data-es="Canción Solicitada">Song Request</label>
+        <input type="text" class="form-input" id="rsvpSong" placeholder="Artist - Song Title" data-en-placeholder="Artist - Song Title" data-es-placeholder="Artista - Título de la Canción">
+      </div>
+    </div>
+
+    <div id="noSection" class="form-hidden">
+      <p class="decline-msg" data-en="We will miss you dearly on our special day!" data-es="¡Te extrañaremos mucho en nuestro día especial!">We will miss you dearly on our special day!</p>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="submit-btn" data-en="Send RSVP" data-es="Enviar RSVP">Send RSVP</button>
+    </div>
+
+    <p class="form-note" id="formNote" data-en="We can't wait to celebrate with you." data-es="Estamos ansiosos por celebrar con ustedes.">We can't wait to celebrate with you.</p>
   </form>
 </section>
 
+<!-- FOOTER -->
+<footer class="site-footer" id="siteFooter">
+  <div class="footer-initials">D & J</div>
+  <hr class="footer-rule">
+  <div class="footer-date">07 · 07 · 27</div>
+</footer>
+
+<script>
+// Tab Navigation
+const tabs = document.querySelectorAll('.nav-tab');
+const panels = document.querySelectorAll('.tab-panel');
+const footer = document.getElementById('siteFooter');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = tab.getAttribute('data-s');
+    
+    tabs.forEach(t => t.classList.remove('on'));
+    tab.classList.add('on');
+    
+    panels.forEach(panel => {
+      panel.classList.remove('active', 'hero-section');
+      if(panel.id === target) {
+        panel.classList.add('active');
+        if(target === 'hero') panel.classList.add('hero-section');
+      }
+    });
+
+    if(target === 'hero') {
+      footer.classList.add('hidden');
+    } else {
+      footer.classList.remove('hidden');
+    }
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+});
+
+// RSVP Toggle logic
+const attendBtns = document.querySelectorAll('#attendToggle .toggle-btn');
+const attendingInput = document.getElementById('rsvpAttending');
+const yesSection = document.getElementById('yesSection');
+const noSection = document.getElementById('noSection');
+
+attendBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    attendBtns.forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    const val = btn.getAttribute('data-val');
+    attendingInput.value = val;
+    if(val === 'yes') {
+      yesSection.classList.remove('form-hidden');
+      noSection.classList.add('form-hidden');
+    } else {
+      noSection.classList.remove('form-hidden');
+      yesSection.classList.add('form-hidden');
+    }
+  });
+});
+
+// Scroll Reveal observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      entry.target.classList.add('vis');
+    }
+  });
+}, {threshold: 0.1});
+
+document.querySelectorAll('.rv').forEach(el => observer.observe(el));
+
+// Language Toggle functionality
+const langToggle = document.getElementById('langToggle');
+let currentLang = 'en';
+
+langToggle.addEventListener('click', () => {
+  currentLang = currentLang === 'en' ? 'es' : 'en';
+  langToggle.textContent = langToggle.getAttribute(`data-${currentLang === 'en' ? 'es' : 'en'}`);
+  
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const text = el.getAttribute(`data-${currentLang}`);
+    if(text) {
+      if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = text;
+      } else {
+        el.innerHTML = text;
+      }
+    }
+  });
+
+  document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+    const ph = el.getAttribute(`data-${currentLang}-placeholder`);
+    if(ph) el.placeholder = ph;
+  });
+});
+</script>
 </body>
 </html>
