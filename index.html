@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="color-scheme" content="light">
 <title>Danisa &amp; Julian — 07 · 07 · 27</title>
-<meta name="description" content="The wedding of Danisa and Julian. July 7, 2027. La Vega, Dominican Republic.">
+<meta name="description" content="The wedding of Danisa and Julian. July 7, 2027. Dominican Republic.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -120,7 +120,7 @@
   .gintro{font-size:12.5pt;color:var(--dark);text-align:center;margin-bottom:2rem;}
   .cards{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;}
   @media(max-width:600px){.cards{grid-template-columns:1fr;}}
-  .card{border:none;border-radius:4px;padding:2rem 1.5rem;background:var(--teal);}
+  .card{border:none;border-radius:4px;padding:2rem 1.5rem;background:var(--forest);}
   .card h3{font-family:'Cormorant SC',serif;font-weight:600;font-size:13pt;letter-spacing:0.08em;
     text-transform:lowercase;color:var(--gold);text-align:center;margin-bottom:0.7rem;}
   .card p{font-size:11.5pt;color:var(--wood);}
@@ -194,18 +194,24 @@
   .timeline .item::before{content:'';position:absolute;left:-2rem;top:0.5em;width:9px;height:9px;border-radius:50%;background:var(--gold);}
   .tl-time{font-style:italic;font-size:11.5pt;color:var(--teal);opacity:0.72;}
 
-  /* ── INTRO REVEAL (jungle leaves parting) ── */
-  #intro{position:fixed;inset:0;z-index:200;overflow:hidden;}
-  #intro .panel{position:absolute;top:0;bottom:0;width:51%;background:var(--wood);overflow:hidden;
-    transition:transform 1.5s cubic-bezier(.66,0,.34,1);}
-  #intro .panel.left{left:0;}
-  #intro .panel.right{right:0;}
-  #intro .panel img{position:absolute;top:50%;width:150%;max-width:none;opacity:0.85;}
-  #intro .panel.left img{right:-35%;transform:translateY(-50%);}
-  #intro .panel.right img{left:-35%;transform:translateY(-50%) scaleX(-1);}
-  #intro.open{pointer-events:none;}
-  #intro.open .panel.left{transform:translateX(-101%);}
-  #intro.open .panel.right{transform:translateX(101%);}
+  /* ── INTRO REVEAL (palm clusters parting to open a path) ── */
+  #intro{position:fixed;inset:0;z-index:200;background:var(--wood);overflow:hidden;transition:opacity 1.1s ease 0.35s;}
+  #intro.open{opacity:0;pointer-events:none;}
+  #intro .cluster{position:absolute;top:0;bottom:0;width:54vw;transition:transform 1.5s cubic-bezier(.6,0,.32,1);}
+  #intro .cluster.left{left:0;}
+  #intro .cluster.right{right:0;}
+  #intro.open .cluster.left{transform:translateX(-60%);}
+  #intro.open .cluster.right{transform:translateX(60%);}
+  #intro .frond{position:absolute;width:88%;}
+  #intro .frond img{display:block;width:100%;opacity:0.9;}
+  #intro .cluster.left .f-top{top:-12%;left:-18%;transform-origin:top left;animation:swayA 4.6s ease-in-out infinite;}
+  #intro .cluster.left .f-bot{bottom:-16%;left:-12%;transform-origin:bottom left;animation:swayB 5.2s ease-in-out -1s infinite;}
+  #intro .cluster.right .f-top{top:-12%;right:-18%;transform-origin:top right;animation:swayAr 4.9s ease-in-out infinite;}
+  #intro .cluster.right .f-bot{bottom:-16%;right:-12%;transform-origin:bottom right;animation:swayBr 5.4s ease-in-out -1.3s infinite;}
+  @keyframes swayA{0%,100%{transform:rotate(-2deg);}50%{transform:rotate(2.4deg);}}
+  @keyframes swayB{0%,100%{transform:rotate(2deg);}50%{transform:rotate(-2.4deg);}}
+  @keyframes swayAr{0%,100%{transform:rotate(2deg) scaleX(-1);}50%{transform:rotate(-2.4deg) scaleX(-1);}}
+  @keyframes swayBr{0%,100%{transform:rotate(-2deg) scaleX(-1);}50%{transform:rotate(2.4deg) scaleX(-1);}}
   @media(prefers-reduced-motion:reduce){#intro{display:none;}}
 
   /* ── FOOTER ── */
@@ -235,8 +241,8 @@
 <body>
 
 <div id="intro" aria-hidden="true">
-  <div class="panel left"><img src="monstera.png" alt=""></div>
-  <div class="panel right"><img src="monstera.png" alt=""></div>
+  <div class="cluster left"><div class="frond f-top"><img src="areca.png" alt=""></div><div class="frond f-bot"><img src="fan-palm.png" alt=""></div></div>
+  <div class="cluster right"><div class="frond f-top"><img src="areca.png" alt=""></div><div class="frond f-bot"><img src="fan-palm.png" alt=""></div></div>
 </div>
 
 <nav class="nav">
@@ -251,12 +257,11 @@
 
 <!-- ═══ HERO ═══ -->
 <section id="home" class="hero">
-  <img class="hero-botanical bl" src="areca.png" alt="" aria-hidden="true">
   <p class="kick rv" data-en="for the wedding of" data-es="para la boda de">for the wedding of</p>
   <h1 class="names rv">Danisa<span class="amp">&amp;</span>Julian</h1>
   <hr class="rule rv">
   <p class="date rv">07 · 07 · 27</p>
-  <p class="place rv" data-en="La Vega, Dominican Republic" data-es="La Vega, República Dominicana">La Vega, Dominican Republic</p>
+  <p class="place rv" data-en="Dominican Republic" data-es="República Dominicana">Dominican Republic</p>
   <p class="tag rv" data-en="Where the hills are green, the nights are alive, and the love is deep." data-es="En las colinas verdes, la noche sigue viva y el corazón sigue lleno.">Where the hills are green, the nights are alive, and the love is deep.</p>
   <p class="cue rv" data-en="scroll to arrive" data-es="desliza para llegar">scroll to arrive</p>
 </section>
@@ -648,8 +653,8 @@
   if(intro){
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ intro.remove(); }
     else {
-      setTimeout(function(){ intro.classList.add('open'); }, 400);
-      setTimeout(function(){ if(intro.parentNode) intro.remove(); }, 2200);
+      setTimeout(function(){ intro.classList.add('open'); }, 1600);
+      setTimeout(function(){ if(intro.parentNode) intro.remove(); }, 3300);
     }
   }
 
