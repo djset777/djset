@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="color-scheme" content="light">
 <title>Danisa &amp; Julian — 07 · 07 · 27</title>
-<meta name="description" content="The wedding of Danisa and Julian. July 7, 2027. El Aguacate, La Vega, República Dominicana.">
+<meta name="description" content="The wedding of Danisa and Julian. July 7, 2027. La Vega, Dominican Republic.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -59,7 +59,7 @@
     content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.3px;
     background:linear-gradient(to right,rgba(212,175,55,0),var(--gold) 30%,var(--gold) 70%,rgba(212,175,55,0));
   }
-  @media(max-width:440px){.nav{gap:0.9rem;}.nav a{font-size:9pt;letter-spacing:0.07em;}.nav .lang{font-size:8.5pt;}}
+  @media(max-width:600px){.nav{gap:0.55rem;flex-wrap:wrap;}.nav a{font-size:8pt;letter-spacing:0.03em;}.nav .lang{position:static;transform:none;order:-1;font-size:8pt;padding:0.18em 0.45em;}}
 
   /* ── LAYOUT ── */
   section{position:relative;scroll-margin-top:var(--nav-h);}
@@ -83,8 +83,8 @@
   .hero-botanical.bl{left:-5vw;bottom:-2vh;width:clamp(150px,34vw,240px);}
   .hero-botanical.tr{right:-4vw;top:3vh;width:clamp(90px,20vw,150px);}
   .names{font-family:'Cormorant SC',serif;font-weight:300;line-height:1.0;
-    letter-spacing:0.05em;font-size:clamp(2.6rem,14vw,4rem);color:var(--teal);margin-top:1rem;}
-  .amp{display:block;font-size:0.34em;color:var(--gold);margin:0.3em 0;letter-spacing:0.14em;}
+    letter-spacing:0.04em;font-size:clamp(1.6rem,8.2vw,3.6rem);white-space:nowrap;color:var(--teal);margin-top:1rem;}
+  .amp{font-size:0.58em;color:var(--gold);margin:0 0.22em;letter-spacing:0.08em;}
   .date{font-family:'Cormorant SC',serif;font-weight:300;font-size:clamp(1.2rem,6vw,1.7rem);
     letter-spacing:0.26em;color:var(--teal);}
   .place{font-style:italic;font-size:12.5pt;color:var(--dark);opacity:0.78;margin-top:0.9rem;}
@@ -185,6 +185,29 @@
   .rsvp-panel .yn button.on,.rsvp-panel .toggle2 button.on{background:var(--gold);color:var(--teal);border-color:var(--gold);}
   .rsvp-panel .submit{background:var(--gold);color:var(--teal);}
 
+  /* ── TIMELINE (schedule + travel anchor) ── */
+  .timeline{position:relative;padding-left:2rem;margin-top:1.6rem;}
+  .timeline::before{content:'';position:absolute;left:5px;top:0.5em;bottom:0.5em;width:2px;
+    background:linear-gradient(to bottom,rgba(212,175,55,0),var(--gold) 7%,var(--gold) 93%,rgba(212,175,55,0));}
+  .timeline .item{position:relative;margin-top:1.7rem;}
+  .timeline .item:first-child{margin-top:0;}
+  .timeline .item::before{content:'';position:absolute;left:-2rem;top:0.5em;width:9px;height:9px;border-radius:50%;background:var(--gold);}
+  .tl-time{font-style:italic;font-size:11.5pt;color:var(--teal);opacity:0.72;}
+
+  /* ── INTRO REVEAL (jungle leaves parting) ── */
+  #intro{position:fixed;inset:0;z-index:200;overflow:hidden;}
+  #intro .panel{position:absolute;top:0;bottom:0;width:51%;background:var(--wood);overflow:hidden;
+    transition:transform 1.5s cubic-bezier(.66,0,.34,1);}
+  #intro .panel.left{left:0;}
+  #intro .panel.right{right:0;}
+  #intro .panel img{position:absolute;top:50%;width:150%;max-width:none;opacity:0.85;}
+  #intro .panel.left img{right:-35%;transform:translateY(-50%);}
+  #intro .panel.right img{left:-35%;transform:translateY(-50%) scaleX(-1);}
+  #intro.open{pointer-events:none;}
+  #intro.open .panel.left{transform:translateX(-101%);}
+  #intro.open .panel.right{transform:translateX(101%);}
+  @media(prefers-reduced-motion:reduce){#intro{display:none;}}
+
   /* ── FOOTER ── */
   .footer{position:relative;text-align:center;padding:4rem 1.6rem 3rem;overflow:hidden;}
   .footer .frule{width:3rem;height:1.3px;border:none;margin:0 auto 1.4rem;
@@ -211,9 +234,15 @@
 </head>
 <body>
 
+<div id="intro" aria-hidden="true">
+  <div class="panel left"><img src="monstera.png" alt=""></div>
+  <div class="panel right"><img src="monstera.png" alt=""></div>
+</div>
+
 <nav class="nav">
-  <button class="lang" id="lang" data-en="ES" data-es="EN">ES</button>
+  <button class="lang" id="lang" data-en="Español" data-es="English">Español</button>
   <a data-go="home" class="active" data-en="home" data-es="inicio">home</a>
+  <a data-go="schedule" data-en="schedule" data-es="agenda">schedule</a>
   <a data-go="travel" data-en="travel" data-es="viaje">travel</a>
   <a data-go="qa">q&amp;a</a>
   <a data-go="gifts" data-en="gifts" data-es="regalos">gifts</a>
@@ -227,12 +256,27 @@
   <h1 class="names rv">Danisa<span class="amp">&amp;</span>Julian</h1>
   <hr class="rule rv">
   <p class="date rv">07 · 07 · 27</p>
-  <p class="place rv">El Aguacate, La Vega, República Dominicana</p>
+  <p class="place rv" data-en="La Vega, Dominican Republic" data-es="La Vega, República Dominicana">La Vega, Dominican Republic</p>
   <p class="tag rv" data-en="Where the hills are green, the nights are alive, and the love is deep." data-es="En las colinas verdes, la noche sigue viva y el corazón sigue lleno.">Where the hills are green, the nights are alive, and the love is deep.</p>
   <p class="cue rv" data-en="scroll to arrive" data-es="desliza para llegar">scroll to arrive</p>
 </section>
 
 <div class="breaker wide rv"><img src="banana.png" alt="" aria-hidden="true"></div>
+
+<!-- ═══ SCHEDULE ═══ -->
+<section id="schedule" class="pad">
+  <div class="wrap">
+    <p class="stitle rv" data-en="the weekend" data-es="el fin de semana">the weekend</p>
+    <hr class="rule rv">
+    <p class="note rv" data-en="A rough shape of the celebration: full details to come." data-es="Un bosquejo de la celebración: detalles completos próximamente.">A rough shape of the celebration: full details to come.</p>
+    <div class="timeline rv">
+      <div class="item"><h3 data-en="welcome dinner" data-es="cena de bienvenida">welcome dinner</h3><p class="tl-time" data-en="the evening before · details to come" data-es="la noche anterior · detalles próximamente">the evening before · details to come</p></div>
+      <div class="item"><h3 data-en="ceremony" data-es="ceremonia">ceremony</h3><p class="tl-time" data-en="july 7 · time to come" data-es="7 de julio · hora próximamente">july 7 · time to come</p></div>
+      <div class="item"><h3 data-en="reception" data-es="recepción">reception</h3><p class="tl-time" data-en="dinner, dancing &amp; toasts" data-es="cena, baile y brindis">dinner, dancing &amp; toasts</p></div>
+      <div class="item"><h3 data-en="after-party" data-es="after-party">after-party</h3><p class="tl-time" data-en="poolside, into the night" data-es="junto a la piscina, hasta la madrugada">poolside, into the night</p></div>
+    </div>
+  </div>
+</section>
 
 <!-- ═══ TRAVEL ═══ -->
 <section id="travel" class="pad">
@@ -241,6 +285,7 @@
     <hr class="rule rv">
     <p class="note rv" data-en="This part of the Dominican Republic is lush and quietly rooted in the heart of the island: nothing like the resort towns most visitors know. If you have any questions about getting here or getting around, just reach out. We're happy to help however we can." data-es="Esta parte de la República Dominicana es verde y profundamente arraigada en el corazón de la isla: nada como las zonas turísticas que la mayoría conoce. Si tienen preguntas sobre cómo llegar o moverse, no duden en escribirnos. Con mucho gusto les ayudamos.">This part of the Dominican Republic is lush and quietly rooted in the heart of the island: nothing like the resort towns most visitors know. If you have any questions about getting here or getting around, just reach out. We're happy to help however we can.</p>
 
+    <div class="timeline rv">
     <div class="item rv"><h3 data-en="getting in" data-es="cómo llegar">getting in</h3>
       <p data-en="We recommend flying into Santiago International Airport (STI): the closest airport and the most practical entry point. From there, La Vega is about 45 minutes by car." data-es="Recomendamos volar al Aeropuerto Internacional de Santiago (STI): el más cercano y el punto de entrada más práctico. Desde allí, La Vega queda a unos 45 minutos en carro.">We recommend flying into Santiago International Airport (STI): the closest airport and the most practical entry point. From there, La Vega is about 45 minutes by car.</p></div>
 
@@ -269,6 +314,7 @@
         <li data-en="Canyoning" data-es="Barranquismo">Canyoning</li>
         <li data-en="River trekking" data-es="Senderismo de río">River trekking</li>
       </ul></div>
+    </div>
 
     <p class="disc rv" data-en="Exploration beyond La Vega is entirely at guests' own discretion. Recommendations available on request." data-es="La exploración fuera de La Vega queda enteramente a discreción de los invitados. Recomendaciones disponibles a solicitud.">Exploration beyond La Vega is entirely at guests' own discretion. Recommendations available on request.</p>
   </div>
@@ -596,6 +642,16 @@
       submitBtn.textContent = t('send rsvp','enviar');
     });
   });
+
+  /* ── Intro reveal ── */
+  var intro=document.getElementById('intro');
+  if(intro){
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ intro.remove(); }
+    else {
+      setTimeout(function(){ intro.classList.add('open'); }, 400);
+      setTimeout(function(){ if(intro.parentNode) intro.remove(); }, 2200);
+    }
+  }
 
 })();
 </script>
