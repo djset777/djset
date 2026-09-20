@@ -8,7 +8,7 @@
 <meta name="description" content="The wedding of Danisa and Julian. July 7, 2027. Dominican Republic.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
 <style>
   :root{
     --teal:#01605F;      /* primary: type + botanicals */
@@ -121,7 +121,7 @@
   .gintro{font-size:12.5pt;color:var(--dark);text-align:center;margin-bottom:2rem;}
   .cards{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;}
   @media(max-width:600px){.cards{grid-template-columns:1fr;}}
-  .card{border:1px solid var(--teal);border-radius:4px;padding:1.8rem 1.4rem;background:transparent;}
+  .card{border:none;border-radius:6px;padding:1.9rem 1.5rem;background:rgba(255,255,255,0.45);box-shadow:0 8px 24px rgba(1,38,31,0.06);}
   .card h3{font-family:'Cormorant SC',serif;font-weight:600;font-size:13pt;letter-spacing:0.08em;
     text-transform:lowercase;color:var(--teal);text-align:center;margin-bottom:0.7rem;}
   .card p{font-size:11.5pt;color:var(--dark);}
@@ -221,6 +221,17 @@
   @keyframes jw2r{0%,100%{transform:rotate(-2deg) scaleX(-1);}50%{transform:rotate(2deg) scaleX(-1);}}
   @media(prefers-reduced-motion:reduce){#intro{display:none;}}
 
+  /* ── COUNTDOWN ── */
+  .cd{display:flex;justify-content:center;gap:clamp(0.7rem,5vw,2.2rem);margin-top:1.3rem;}
+  .cd-unit{text-align:center;}
+  .cd-num{display:block;font-family:'Cormorant SC',serif;font-weight:300;font-size:clamp(1.9rem,9vw,3rem);color:var(--teal);letter-spacing:0.03em;line-height:1;}
+  .cd-lab{font-family:'Cormorant SC',serif;font-size:8.5pt;letter-spacing:0.16em;text-transform:lowercase;color:var(--teal);opacity:0.6;}
+
+  /* ── SCRIPT HEADER ── */
+  .storytitle{text-align:center;line-height:1;}
+  .storytitle .s1{font-family:'Cormorant SC',serif;font-weight:500;font-size:33pt;letter-spacing:0.14em;text-transform:lowercase;color:var(--teal);}
+  .storytitle .s2{font-family:'Pinyon Script',cursive;font-size:40pt;color:var(--gold);}
+
   /* ── FOOTER ── */
   .footer{position:relative;text-align:center;padding:4rem 1.6rem 3rem;overflow:hidden;}
   .footer .frule{width:3rem;height:1.3px;border:none;margin:0 auto 1.4rem;
@@ -271,6 +282,28 @@
   <p class="place rv" data-en="Dominican Republic" data-es="República Dominicana">Dominican Republic</p>
   <p class="tag rv" data-en="Where the hills are green, the nights are alive, and the love is deep." data-es="En las colinas verdes, la noche sigue viva y el corazón sigue lleno.">Where the hills are green, the nights are alive, and the love is deep.</p>
   <p class="cue rv" data-en="begin the journey" data-es="comienza el viaje">begin the journey</p>
+</section>
+
+<!-- ═══ COUNTDOWN ═══ -->
+<section id="countdown" class="pad" style="padding-top:2.6rem;padding-bottom:2.6rem;">
+  <div class="wrap">
+    <p class="kick rv" data-en="counting down to 07 · 07 · 27" data-es="cuenta regresiva al 07 · 07 · 27">counting down to 07 · 07 · 27</p>
+    <div class="cd rv">
+      <div class="cd-unit"><span class="cd-num" id="cd-d">—</span><span class="cd-lab" data-en="days" data-es="días">days</span></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-h">—</span><span class="cd-lab" data-en="hours" data-es="horas">hours</span></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-m">—</span><span class="cd-lab" data-en="minutes" data-es="minutos">minutes</span></div>
+      <div class="cd-unit"><span class="cd-num" id="cd-s">—</span><span class="cd-lab" data-en="seconds" data-es="segundos">seconds</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OUR STORY ═══ -->
+<section id="story" class="pad">
+  <div class="wrap">
+    <p class="storytitle rv"><span class="s1" data-en="our" data-es="nuestra">our</span> <span class="s2" data-en="story" data-es="historia">story</span></p>
+    <hr class="rule rv">
+    <p class="note rv" data-en="Our story, in our own words, is coming soon: how it started, the road here, and the day it all points to." data-es="Nuestra historia, en nuestras propias palabras, próximamente: cómo empezó, el camino hasta aquí, y el día al que todo apunta.">Our story, in our own words, is coming soon: how it started, the road here, and the day it all points to.</p>
+  </div>
 </section>
 
 <div class="breaker wide rv"><img src="banana.png" alt="" aria-hidden="true"></div>
@@ -388,11 +421,11 @@
       <div class="card"><h3 class="give-head" data-en="our first home" data-es="nuestro primer hogar">our first home</h3>
         <p data-en="We've always called New York home. What we don't have yet is a home in New York that's ours. Your contribution brings us one step closer: a place to build, to host, to fill with people and life." data-es="Siempre hemos llamado a Nueva York nuestro hogar. Lo que aún no tenemos es un hogar en Nueva York que sea nuestro. Su contribución nos acerca un paso más: un lugar para construir, recibir, y llenar de gente y vida.">We've always called New York home. What we don't have yet is a home in New York that's ours. Your contribution brings us one step closer: a place to build, to host, to fill with people and life.</p>
         <p class="give-cue" data-en="tap to give" data-es="toca para contribuir">tap to give</p>
-        <div class="give-panel"><p class="give-detail" data-en="Zelle: coming soon" data-es="Zelle: próximamente">Zelle: coming soon</p><div class="qr" data-en="QR code coming soon" data-es="Código QR próximamente">QR code coming soon</div></div></div>
+        <div class="give-panel"><p class="give-detail" data-en="Zelle: coming soon" data-es="Zelle: próximamente">Zelle: coming soon</p></div></div>
       <div class="card"><h3 class="give-head" data-en="our first trip" data-es="nuestro primer viaje">our first trip</h3>
         <p data-en="July 7th will be the loudest, fullest, most surrounded-by-love day of our lives. What comes right after is just the two of us, somewhere quiet, for the very first time as husband and wife." data-es="El 7 de julio será el día más lleno, más rodeado de amor de nuestras vidas. Lo que viene justo después somos solo nosotros dos, en algún lugar tranquilo, por primera vez como esposos.">July 7th will be the loudest, fullest, most surrounded-by-love day of our lives. What comes right after is just the two of us, somewhere quiet, for the very first time as husband and wife.</p>
         <p class="give-cue" data-en="tap to give" data-es="toca para contribuir">tap to give</p>
-        <div class="give-panel"><p class="give-detail" data-en="Venmo: coming soon" data-es="Venmo: próximamente">Venmo: coming soon</p><div class="qr" data-en="QR code coming soon" data-es="Código QR próximamente">QR code coming soon</div></div></div>
+        <div class="give-panel"><p class="give-detail" data-en="Venmo: coming soon" data-es="Venmo: próximamente">Venmo: coming soon</p></div></div>
     </div>
 
   </div>
@@ -673,6 +706,23 @@
       el.addEventListener('click',function(){ if(panel) panel.classList.toggle('show'); });
     });
   });
+
+  /* ── Countdown to 07·07·27 ── */
+  (function(){
+    var target=new Date(2027,6,7,0,0,0).getTime();
+    function two(n){return (n<10?'0':'')+n;}
+    function tick(){
+      var diff=target-Date.now(); if(diff<0)diff=0;
+      var d=Math.floor(diff/86400000), h=Math.floor(diff%86400000/3600000),
+          m=Math.floor(diff%3600000/60000), s=Math.floor(diff%60000/1000);
+      var e;
+      if(e=document.getElementById('cd-d'))e.textContent=d;
+      if(e=document.getElementById('cd-h'))e.textContent=two(h);
+      if(e=document.getElementById('cd-m'))e.textContent=two(m);
+      if(e=document.getElementById('cd-s'))e.textContent=two(s);
+    }
+    tick(); setInterval(tick,1000);
+  })();
 
 })();
 </script>
