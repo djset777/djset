@@ -78,25 +78,26 @@
     letter-spacing:0.14em;text-transform:lowercase;text-align:center;color:var(--teal);}
   .rule{width:4.4rem;height:1.3px;border:none;margin:1.5rem auto;
     background:linear-gradient(to right,rgba(212,175,55,0),var(--gold) 20%,var(--gold) 80%,rgba(212,175,55,0));}
+  .hero .rule{margin:1.9rem auto;}
 
   /* ── HERO ── */
-  .hero{min-height:calc(100vh - var(--nav-h));min-height:calc(100dvh - var(--nav-h));
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    text-align:center;padding:5rem 1.6rem 4rem;overflow:hidden;}
+  .hero{min-height:100vh;min-height:100dvh;
+    display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+    text-align:center;padding:calc(var(--nav-h) + 1.6rem) 1.6rem 2.5rem;overflow:hidden;}
   .hero > *{position:relative;z-index:2;}
   .hero-botanical{position:absolute;z-index:1;pointer-events:none;opacity:0.5;}
   .hero-botanical.bl{left:-5vw;bottom:-2vh;width:clamp(150px,34vw,240px);}
   .hero-botanical.tr{right:-4vw;top:3vh;width:clamp(90px,20vw,150px);}
   .names{font-family:'Cormorant SC',serif;font-weight:300;line-height:1.0;
-    letter-spacing:0.04em;font-size:clamp(1.6rem,8.2vw,3.6rem);white-space:nowrap;color:var(--teal);margin-top:1.5rem;}
+    letter-spacing:0.04em;font-size:clamp(1.6rem,8.2vw,3.6rem);white-space:nowrap;color:var(--teal);margin-top:0;}
   .amp{font-size:0.58em;color:var(--gold);margin:0 0.22em;letter-spacing:0.08em;}
   .date{font-family:'Cormorant SC',serif;font-weight:300;font-size:clamp(1.2rem,6vw,1.7rem);
     letter-spacing:0.26em;color:var(--teal);}
-  .place{font-style:normal;font-size:10.5pt;color:var(--teal);margin-top:0.5rem;}
+  .place{font-style:normal;font-size:13pt;color:var(--teal);margin-top:0.5rem;}
   .tag{font-style:italic;font-size:10.5pt;color:var(--teal);max-width:24em;margin:0.35rem auto 0;}
   .cue{font-family:'Cormorant SC',serif;font-size:9pt;letter-spacing:0.28em;text-transform:lowercase;
     color:var(--teal);opacity:0.5;margin-top:2rem;}
-  .scroll-cue{margin-top:1.5rem;opacity:0.45;}
+  .scroll-cue{margin-top:auto;padding-top:1.6rem;opacity:0.45;}
   .scroll-cue svg{display:block;margin:0 auto;}
 
   /* ── BOTANICAL BREAKERS (consistent, subtle) ── */
@@ -241,8 +242,8 @@
   @media(prefers-reduced-motion:reduce){#intro{display:none;}}
 
   /* ── COUNTDOWN ── */
-  .cd{display:flex;justify-content:center;gap:clamp(0.4rem,2vw,0.75rem);margin-top:0.9rem;}
-  .cd-unit{text-align:center;}
+  .cd{display:flex;justify-content:center;gap:clamp(0.25rem,1.4vw,0.55rem);margin-top:0.6rem;}
+  .cd-unit{text-align:center;min-width:2.9em;}
   .cd-num{display:block;font-family:'Cormorant SC',serif;font-weight:400;font-size:clamp(0.85rem,3.2vw,1.05rem);color:var(--gold);letter-spacing:0.03em;line-height:1;}
   .cd-lab{font-family:'Cormorant SC',serif;font-size:8pt;letter-spacing:0.1em;text-transform:lowercase;color:var(--gold);}
 
@@ -298,7 +299,7 @@
     <div class="cd-unit"><span class="cd-num" id="cd-m">—</span><span class="cd-lab" data-en="min" data-es="min">min</span></div>
     <div class="cd-unit"><span class="cd-num" id="cd-s">—</span><span class="cd-lab" data-en="sec" data-es="seg">sec</span></div>
   </div>
-  <p class="place rv" data-en="Dominican Republic" data-es="República Dominicana" style="margin-top:1.3rem;">Dominican Republic</p>
+  <p class="place rv" data-en="Dominican Republic" data-es="República Dominicana" style="margin-top:1.7rem;">Dominican Republic</p>
   <p class="tag rv" data-en="Where the hills are green, the nights are alive, and the love is deep." data-es="En las colinas verdes, la noche sigue viva y el corazón sigue lleno.">Where the hills are green, the nights are alive, and the love is deep.</p>
   <div class="scroll-cue rv" aria-hidden="true"><svg viewBox="0 0 24 12" width="24" height="12"><path d="M2 2 L12 10 L22 2" fill="none" stroke="#01605F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 </section>
