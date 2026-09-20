@@ -12,13 +12,14 @@
 <style>
   :root{
     --teal:#01605F;      /* primary: type + botanicals */
+    --teal-soft:#3B7370;  /* muted teal for quiet lines */
     --gold:#D4AF37;      /* rare accent */
     --wood:#E8DCC4;
     --ground:#F2ECDE;   /* page background */      /* linen ground */
     --forest:#014421;
     --navy:#003153;
     --dark:#12261F;      /* body text on linen */
-    --nav-h:54px;
+    --nav-h:58px;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + env(safe-area-inset-top,0px));}
@@ -47,23 +48,23 @@
   .nav .lang{
     position:absolute;left:0.9rem;top:calc(50% + env(safe-area-inset-top,0px)/2);
     transform:translateY(-50%);
-    font-family:'Cormorant SC',serif;font-weight:600;font-size:9.5pt;
-    letter-spacing:0.1em;color:var(--teal);
+    font-family:'Cormorant SC',serif;font-weight:600;font-size:10pt;
+    letter-spacing:0.08em;color:var(--teal);
     border:1px solid var(--gold);border-radius:2px;
-    background:transparent;padding:0.2em 0.55em;cursor:pointer;
+    background:transparent;padding:0.3em 0.6em;cursor:pointer;
   }
   .nav a{
     font-family:'Cormorant SC',serif;font-weight:500;
-    font-size:10.5pt;letter-spacing:0.13em;text-transform:lowercase;
-    color:var(--teal);opacity:0.55;text-decoration:none;cursor:pointer;
-    position:relative;padding:0.15em 0;transition:opacity .25s;
+    font-size:11pt;letter-spacing:0.1em;text-transform:lowercase;
+    color:var(--teal);opacity:0.6;text-decoration:none;cursor:pointer;
+    position:relative;padding:0.5em 0.15em;transition:opacity .25s;
   }
   .nav a.active{opacity:1;}
   .nav a.active::after{
     content:'';position:absolute;left:0;right:0;bottom:-3px;height:1.3px;
     background:linear-gradient(to right,rgba(212,175,55,0),var(--gold) 30%,var(--gold) 70%,rgba(212,175,55,0));
   }
-  @media(max-width:600px){.nav{gap:0.55rem;flex-wrap:wrap;}.nav a{font-size:8pt;letter-spacing:0.03em;}.nav .lang{position:static;transform:none;order:-1;font-size:8pt;padding:0.18em 0.45em;}}
+  @media(max-width:600px){.nav{gap:0.75rem;flex-wrap:wrap;}.nav a{font-size:9.5pt;letter-spacing:0.06em;padding:0.4em 0.1em;}.nav .lang{position:static;transform:none;order:-1;font-size:9pt;padding:0.25em 0.5em;}}
 
   /* ── LAYOUT ── */
   section{position:relative;scroll-margin-top:var(--nav-h);}
@@ -72,7 +73,7 @@
   @media(max-width:600px){.pad{padding:3.4rem 0;}}
 
   .kick{font-family:'Cormorant SC',serif;font-weight:500;font-size:10.5pt;
-    letter-spacing:0.3em;text-transform:lowercase;text-align:center;color:var(--teal);opacity:0.6;}
+    letter-spacing:0.16em;text-transform:lowercase;text-align:center;color:var(--teal-soft);}
   .stitle{font-family:'Cormorant SC',serif;font-weight:500;font-size:33pt;
     letter-spacing:0.14em;text-transform:lowercase;text-align:center;color:var(--teal);}
   .rule{width:4.4rem;height:1.3px;border:none;margin:1.5rem auto;
@@ -91,8 +92,8 @@
   .amp{font-size:0.58em;color:var(--gold);margin:0 0.22em;letter-spacing:0.08em;}
   .date{font-family:'Cormorant SC',serif;font-weight:300;font-size:clamp(1.2rem,6vw,1.7rem);
     letter-spacing:0.26em;color:var(--teal);}
-  .place{font-style:italic;font-size:12.5pt;color:var(--teal);opacity:0.85;margin-top:0.5rem;}
-  .tag{font-style:italic;font-size:10.5pt;color:var(--teal);max-width:24em;margin:0.9rem auto 0;}
+  .place{font-style:normal;font-size:10.5pt;color:var(--teal);margin-top:0.5rem;}
+  .tag{font-style:italic;font-size:10.5pt;color:var(--teal);max-width:24em;margin:0.35rem auto 0;}
   .cue{font-family:'Cormorant SC',serif;font-size:9pt;letter-spacing:0.28em;text-transform:lowercase;
     color:var(--teal);opacity:0.5;margin-top:2rem;}
   .scroll-cue{margin-top:1.5rem;opacity:0.45;}
@@ -105,34 +106,34 @@
   .breaker.wide img{width:clamp(250px,64vw,380px);}
 
   /* ── TRAVEL ── */
-  .note{font-style:italic;font-size:12.5pt;color:var(--teal);text-align:center;margin-bottom:2rem;}
+  .note{font-style:normal;font-size:13pt;color:var(--dark);text-align:center;margin-bottom:2rem;}
   .item{margin-top:1.8rem;}
   .item h3{font-family:'Cormorant SC',serif;font-weight:600;font-size:12.5pt;letter-spacing:0.1em;
     text-transform:lowercase;color:var(--teal);margin-bottom:0.25rem;}
-  .item p{font-size:12.5pt;color:var(--dark);}
+  .item p{font-size:13pt;color:var(--dark);}
   .item a{color:var(--teal);text-decoration:underline;text-underline-offset:2px;}
   .things{list-style:none;margin-top:0.5rem;}
   .things li{font-size:12.5pt;color:var(--dark);padding-left:1em;position:relative;}
   .things li::before{content:'';position:absolute;left:0;top:0.7em;width:4px;height:4px;border-radius:50%;background:var(--teal);}
-  .disc{font-style:italic;font-size:11pt;color:var(--teal);text-align:center;margin-top:2rem;opacity:0.8;}
+  .disc{font-style:normal;font-size:11.5pt;color:var(--teal-soft);text-align:center;margin-top:2rem;}
 
   /* ── Q&A ── */
   .qa{margin-top:1.8rem;}
   .qa .q{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:13.5pt;color:var(--teal);margin-bottom:0.2rem;}
-  .qa .a{font-size:12.5pt;color:var(--dark);}
+  .qa .a{font-size:13pt;color:var(--dark);}
   .qa .a a{color:var(--teal);text-decoration:underline;text-underline-offset:2px;}
 
   /* ── GIFTS ── */
-  .gintro{font-size:12.5pt;color:var(--dark);text-align:center;margin-bottom:2rem;}
+  .gintro{font-size:13pt;color:var(--dark);text-align:center;margin-bottom:2rem;}
   .cards{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;}
   @media(max-width:600px){.cards{grid-template-columns:1fr;}}
   .card{border:1px solid var(--gold);border-radius:6px;padding:1.9rem 1.5rem;background:transparent;}
   .card h3{font-family:'Cormorant SC',serif;font-weight:600;font-size:13pt;letter-spacing:0.08em;
     text-transform:lowercase;color:var(--teal);text-align:center;margin-bottom:0.7rem;}
-  .card p{font-size:11.5pt;color:var(--dark);}
+  .card p{font-size:12pt;color:var(--dark);}
   .give-head{cursor:pointer;transition:color .2s;}
   .give-head:hover{color:var(--gold);}
-  .give-cue{font-family:'Cormorant SC',serif;font-size:9pt;letter-spacing:0.1em;text-transform:lowercase;color:var(--gold);text-align:center;margin-top:0.8rem;cursor:pointer;}
+  .give-cue{font-family:'Cormorant SC',serif;font-size:9pt;letter-spacing:0.1em;text-transform:lowercase;color:var(--teal);text-align:center;margin-top:0.8rem;cursor:pointer;}
   .give-panel{display:none;margin-top:0.9rem;text-align:center;}
   .give-panel.show{display:block;}
   .give-detail{font-size:11pt;color:var(--teal);}
@@ -205,7 +206,7 @@
   .timeline .item{position:relative;margin-top:1.8rem;}
   .timeline .item:first-child{margin-top:0;}
   .timeline .item::before{content:'';position:absolute;left:-2rem;top:0.5em;width:9px;height:9px;border-radius:50%;background:var(--gold);}
-  .tl-time{font-style:italic;font-size:11.5pt;color:var(--teal);opacity:0.72;}
+  .tl-time{font-style:normal;font-size:11.5pt;color:var(--teal-soft);}
 
   /* ── INTRO REVEAL (surrounding jungle pushed open from the centre) ── */
   #intro{position:fixed;inset:0;z-index:200;background:var(--ground);overflow:hidden;transition:opacity 1.3s ease 0.7s;}
@@ -240,10 +241,10 @@
   @media(prefers-reduced-motion:reduce){#intro{display:none;}}
 
   /* ── COUNTDOWN ── */
-  .cd{display:flex;justify-content:center;gap:clamp(0.6rem,4vw,1.4rem);margin-top:1rem;}
+  .cd{display:flex;justify-content:center;gap:clamp(0.4rem,2vw,0.75rem);margin-top:0.9rem;}
   .cd-unit{text-align:center;}
-  .cd-num{display:block;font-family:'Cormorant SC',serif;font-weight:300;font-size:clamp(1.1rem,4.5vw,1.4rem);color:var(--teal);letter-spacing:0.03em;line-height:1;}
-  .cd-lab{font-family:'Cormorant SC',serif;font-size:8.5pt;letter-spacing:0.16em;text-transform:lowercase;color:var(--teal);opacity:0.6;}
+  .cd-num{display:block;font-family:'Cormorant SC',serif;font-weight:400;font-size:clamp(0.85rem,3.2vw,1.05rem);color:var(--gold);letter-spacing:0.03em;line-height:1;}
+  .cd-lab{font-family:'Cormorant SC',serif;font-size:8pt;letter-spacing:0.1em;text-transform:lowercase;color:var(--gold);}
 
   /* ── SECTION TITLE (serif + script pair) ── */
   .stitle-pair{text-align:center;line-height:1;}
@@ -291,14 +292,13 @@
   <h1 class="names rv">Danisa<span class="amp">&amp;</span>Julian</h1>
   <hr class="rule rv">
   <p class="date rv">07 · 07 · 27</p>
-  <p class="kick rv" data-en="countdown" data-es="cuenta regresiva" style="margin-top:0.9rem;">countdown</p>
   <div class="cd rv">
     <div class="cd-unit"><span class="cd-num" id="cd-d">—</span><span class="cd-lab" data-en="days" data-es="días">days</span></div>
-    <div class="cd-unit"><span class="cd-num" id="cd-h">—</span><span class="cd-lab" data-en="hours" data-es="horas">hours</span></div>
-    <div class="cd-unit"><span class="cd-num" id="cd-m">—</span><span class="cd-lab" data-en="minutes" data-es="minutos">minutes</span></div>
-    <div class="cd-unit"><span class="cd-num" id="cd-s">—</span><span class="cd-lab" data-en="seconds" data-es="segundos">seconds</span></div>
+    <div class="cd-unit"><span class="cd-num" id="cd-h">—</span><span class="cd-lab" data-en="hrs" data-es="hrs">hrs</span></div>
+    <div class="cd-unit"><span class="cd-num" id="cd-m">—</span><span class="cd-lab" data-en="min" data-es="min">min</span></div>
+    <div class="cd-unit"><span class="cd-num" id="cd-s">—</span><span class="cd-lab" data-en="sec" data-es="seg">sec</span></div>
   </div>
-  <p class="place rv" data-en="Dominican Republic" data-es="República Dominicana" style="margin-top:1.6rem;">Dominican Republic</p>
+  <p class="place rv" data-en="Dominican Republic" data-es="República Dominicana" style="margin-top:1.3rem;">Dominican Republic</p>
   <p class="tag rv" data-en="Where the hills are green, the nights are alive, and the love is deep." data-es="En las colinas verdes, la noche sigue viva y el corazón sigue lleno.">Where the hills are green, the nights are alive, and the love is deep.</p>
   <div class="scroll-cue rv" aria-hidden="true"><svg viewBox="0 0 24 12" width="24" height="12"><path d="M2 2 L12 10 L22 2" fill="none" stroke="#01605F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 </section>
