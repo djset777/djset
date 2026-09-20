@@ -106,7 +106,7 @@
 
   /* ── TRAVEL ── */
   .note{font-style:italic;font-size:12.5pt;color:var(--teal);text-align:center;margin-bottom:2rem;}
-  .item{margin-top:1.9rem;}
+  .item{margin-top:1.8rem;}
   .item h3{font-family:'Cormorant SC',serif;font-weight:600;font-size:12.5pt;letter-spacing:0.1em;
     text-transform:lowercase;color:var(--teal);margin-bottom:0.25rem;}
   .item p{font-size:12.5pt;color:var(--dark);}
@@ -117,7 +117,7 @@
   .disc{font-style:italic;font-size:11pt;color:var(--teal);text-align:center;margin-top:2rem;opacity:0.8;}
 
   /* ── Q&A ── */
-  .qa{margin-top:1.9rem;}
+  .qa{margin-top:1.8rem;}
   .qa .q{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:13.5pt;color:var(--teal);margin-bottom:0.2rem;}
   .qa .a{font-size:12.5pt;color:var(--dark);}
   .qa .a a{color:var(--teal);text-decoration:underline;text-underline-offset:2px;}
@@ -200,9 +200,9 @@
 
   /* ── TIMELINE (schedule + travel anchor) ── */
   .timeline{position:relative;padding-left:2rem;margin-top:1.6rem;}
-  .timeline::before{content:'';position:absolute;left:5px;top:0.5em;bottom:0.5em;width:2px;
-    background:linear-gradient(to bottom,rgba(212,175,55,0),var(--gold) 7%,var(--gold) 93%,rgba(212,175,55,0));}
-  .timeline .item{position:relative;margin-top:1.7rem;}
+  .timeline::before{content:'';position:absolute;left:3.5px;top:-1.4em;bottom:-1.4em;width:2px;
+    background:linear-gradient(to bottom,rgba(212,175,55,0) 0,var(--gold) 1.7em,var(--gold) calc(100% - 1.7em),rgba(212,175,55,0) 100%);}
+  .timeline .item{position:relative;margin-top:1.8rem;}
   .timeline .item:first-child{margin-top:0;}
   .timeline .item::before{content:'';position:absolute;left:-2rem;top:0.5em;width:9px;height:9px;border-radius:50%;background:var(--gold);}
   .tl-time{font-style:italic;font-size:11.5pt;color:var(--teal);opacity:0.72;}
@@ -245,10 +245,10 @@
   .cd-num{display:block;font-family:'Cormorant SC',serif;font-weight:300;font-size:clamp(1.9rem,9vw,3rem);color:var(--teal);letter-spacing:0.03em;line-height:1;}
   .cd-lab{font-family:'Cormorant SC',serif;font-size:8.5pt;letter-spacing:0.16em;text-transform:lowercase;color:var(--teal);opacity:0.6;}
 
-  /* ── SCRIPT HEADER ── */
-  .storytitle{text-align:center;line-height:1;}
-  .storytitle .s1{font-family:'Cormorant SC',serif;font-weight:500;font-size:33pt;letter-spacing:0.14em;text-transform:lowercase;color:var(--teal);}
-  .storytitle .s2{font-family:'Pinyon Script',cursive;font-size:40pt;color:var(--gold);}
+  /* ── SECTION TITLE (serif + script pair) ── */
+  .stitle-pair{text-align:center;line-height:1;}
+  .stitle-pair .s1{font-family:'Cormorant SC',serif;font-weight:500;font-size:33pt;letter-spacing:0.12em;text-transform:lowercase;color:var(--teal);}
+  .stitle-pair .s2{font-family:'Pinyon Script',cursive;font-size:42pt;color:var(--teal);line-height:0.85;}
 
   /* ── FOOTER ── */
   .footer{position:relative;text-align:center;padding:4rem 1.6rem 3rem;overflow:hidden;}
@@ -298,7 +298,7 @@
 </section>
 
 <!-- ═══ COUNTDOWN ═══ -->
-<section id="countdown" class="pad" style="padding-top:2.6rem;padding-bottom:2.6rem;">
+<section id="countdown" class="pad">
   <div class="wrap">
     <p class="kick rv" data-en="countdown" data-es="cuenta regresiva">countdown</p>
     <div class="cd rv">
@@ -313,7 +313,7 @@
 <!-- ═══ OUR STORY ═══ -->
 <section id="story" class="pad">
   <div class="wrap">
-    <p class="storytitle rv"><span class="s1" data-en="our" data-es="nuestra">our</span> <span class="s2" data-en="story" data-es="historia">story</span></p>
+    <p class="stitle-pair rv"><span class="s1" data-en="our" data-es="nuestra">our</span> <span class="s2" data-en="story" data-es="historia">story</span></p>
     <hr class="rule rv">
     <p class="note rv" data-en="Our story, in our own words, is coming soon: how it started, the road here, and the day it all points to." data-es="Nuestra historia, en nuestras propias palabras, próximamente: cómo empezó, el camino hasta aquí, y el día al que todo apunta.">Our story, in our own words, is coming soon: how it started, the road here, and the day it all points to.</p>
   </div>
@@ -324,7 +324,7 @@
 <!-- ═══ SCHEDULE ═══ -->
 <section id="schedule" class="pad">
   <div class="wrap">
-    <p class="stitle rv" data-en="the celebration" data-es="la celebración">the celebration</p>
+    <p class="stitle-pair rv"><span class="s1" data-en="the" data-es="la">the</span> <span class="s2" data-en="celebration" data-es="celebración">celebration</span></p>
     <hr class="rule rv">
     <p class="note rv" data-en="A rough shape of the celebration: full details to come." data-es="Un bosquejo de la celebración: detalles completos próximamente.">A rough shape of the celebration: full details to come.</p>
     <div class="timeline rv">
@@ -339,7 +339,7 @@
 <!-- ═══ TRAVEL ═══ -->
 <section id="travel" class="pad">
   <div class="wrap">
-    <p class="stitle rv" data-en="travel" data-es="viaje">travel</p>
+    <p class="stitle-pair rv"><span class="s1" data-en="the" data-es="el">the</span> <span class="s2" data-en="journey" data-es="viaje">journey</span></p>
     <hr class="rule rv">
     <p class="note rv" data-en="This part of the Dominican Republic is lush and quietly rooted in the heart of the island: nothing like the resort towns most visitors know. If you have any questions about getting here or getting around, just reach out. We're happy to help however we can." data-es="Esta parte de la República Dominicana es verde y profundamente arraigada en el corazón de la isla: nada como las zonas turísticas que la mayoría conoce. Si tienen preguntas sobre cómo llegar o moverse, no duden en escribirnos. Con mucho gusto les ayudamos.">This part of the Dominican Republic is lush and quietly rooted in the heart of the island: nothing like the resort towns most visitors know. If you have any questions about getting here or getting around, just reach out. We're happy to help however we can.</p>
 
@@ -383,7 +383,7 @@
 <!-- ═══ Q&A ═══ -->
 <section id="qa" class="pad">
   <div class="wrap">
-    <p class="stitle rv">q&amp;a</p>
+    <p class="stitle-pair rv"><span class="s1" data-en="the" data-es="los">the</span> <span class="s2" data-en="details" data-es="detalles">details</span></p>
     <hr class="rule rv">
 
     <div class="qa rv"><div class="q" data-en="When is the RSVP deadline?" data-es="¿Cuál es la fecha límite para confirmar?">When is the RSVP deadline?</div>
@@ -426,7 +426,7 @@
 <!-- ═══ GIFTS ═══ -->
 <section id="gifts" class="pad">
   <div class="wrap">
-    <p class="stitle rv" data-en="gifts" data-es="regalos">gifts</p>
+    <p class="stitle-pair rv"><span class="s1" data-en="with" data-es="con">with</span> <span class="s2" data-en="gratitude" data-es="gratitud">gratitude</span></p>
     <hr class="rule rv">
     <p class="gintro rv" data-en="The greatest gift is your presence: showing up, traveling far, and being part of this day. For those who wish to give beyond that, contributions toward two shared dreams are welcomed with deep gratitude." data-es="El mayor regalo es su presencia: estar aquí, viajar de lejos, y ser parte de este día. Para quienes deseen dar más allá de eso, contribuciones hacia dos sueños compartidos son recibidas con profunda gratitud.">The greatest gift is your presence: showing up, traveling far, and being part of this day. For those who wish to give beyond that, contributions toward two shared dreams are welcomed with deep gratitude.</p>
 
@@ -451,7 +451,7 @@
   <div class="wrap">
     <div class="rsvp-panel">
     <p class="kick rv" data-en="the final step of arrival" data-es="el último paso de la llegada">the final step of arrival</p>
-    <p class="stitle rv" style="margin-top:0.5rem;">rsvp</p>
+    <p class="stitle-pair rv" style="margin-top:0.5rem;"><span class="s1" data-en="kindly" data-es="por favor">kindly</span> <span class="s2" data-en="respond" data-es="responde">respond</span></p>
     <p class="deadline rv" data-en="kindly reply by 27 · 03 · 27" data-es="responda antes del 27 · 03 · 27">kindly reply by 27 · 03 · 27</p>
 
     <div class="field rv">
